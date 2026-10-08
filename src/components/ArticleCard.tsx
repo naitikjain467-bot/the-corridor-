@@ -1,32 +1,33 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { ArrowUpRight, Bookmark, Clock } from 'lucide-react';
 import { BlogArticle } from '../data/blogs.ts';
+import { categoryToSlug } from '../utils/slugs.ts';
 
 interface ArticleCardProps {
   article: BlogArticle;
-  onReadArticle: (article: BlogArticle) => void;
+  onReadArticle?: (article: BlogArticle) => void;
   isBookmarked: boolean;
-  onToggleBookmark: (id: string, e: React.MouseEvent) => void;
+  onToggleBookmark: (id: string, e?: React.MouseEvent) => void;
   featured?: boolean;
 }
 
 export const ArticleCard: React.FC<ArticleCardProps> = ({
   article,
-  onReadArticle,
   isBookmarked,
   onToggleBookmark,
-  featured = false,
 }) => {
   const [imgError, setImgError] = useState(false);
 
   return (
-    <article
-      onClick={() => onReadArticle(article)}
-      className="group flex flex-col justify-between bg-[#FDFCFA] border border-[#E7E2D9] rounded-lg overflow-hidden hover:border-stone-400 hover:shadow-md transition-all duration-300 cursor-pointer"
-    >
+    <article className="group flex flex-col justify-between bg-[#FDFCFA] border border-[#E7E2D9] rounded-lg overflow-hidden hover:border-stone-400 hover:shadow-md transition-all duration-300 relative">
       <div>
-        {/* Visual Media Header with Fallback */}
-        <div className="relative aspect-[16/10] overflow-hidden bg-[#ECE6DC] border-b border-[#E7E2D9]">
+        {/* Visual Media Header with Link to Unique URL */}
+        <Link
+          to={`/essay/${article.id}`}
+          className="relative aspect-[16/10] overflow-hidden bg-[#ECE6DC] border-b border-[#E7E2D9] block"
+          aria-label={article.title}
+        >
           {!imgError ? (
             <img
               src={article.image}
@@ -45,27 +46,36 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
               </span>
             </div>
           )}
+        </Link>
 
-          {/* Quick Bookmark Trigger in Top Corner */}
-          <button
-            onClick={(e) => onToggleBookmark(article.id, e)}
-            className={`absolute top-3 right-3 p-2 rounded-full backdrop-blur-md transition-colors cursor-pointer ${
-              isBookmarked
-                ? 'bg-stone-900 text-stone-100'
-                : 'bg-[#FBF9F5]/90 text-stone-700 hover:bg-[#FBF9F5] hover:text-stone-950'
-            }`}
-            aria-label="Save for later"
-            title="Save for later"
-          >
-            <Bookmark className="w-3.5 h-3.5" />
-          </button>
-        </div>
+        {/* Quick Bookmark Trigger in Top Corner */}
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            onToggleBookmark(article.id, e);
+          }}
+          className={`absolute top-3 right-3 p-2 rounded-full backdrop-blur-md transition-colors cursor-pointer z-10 ${
+            isBookmarked
+              ? 'bg-stone-900 text-stone-100'
+              : 'bg-[#FBF9F5]/90 text-stone-700 hover:bg-[#FBF9F5] hover:text-stone-950'
+          }`}
+          aria-label="Save for later"
+          title="Save for later"
+        >
+          <Bookmark className="w-3.5 h-3.5" />
+        </button>
 
         {/* Content Body */}
         <div className="p-5 sm:p-6">
           {/* Unboxed Metadata (Zero-Pill Discipline) */}
           <div className="flex items-center gap-2 text-xs text-stone-500 font-sans mb-2.5">
-            <span className="font-medium text-stone-800">{article.category}</span>
+            <Link
+              to={`/category/${categoryToSlug(article.category)}`}
+              className="font-medium text-stone-800 hover:underline"
+            >
+              {article.category}
+            </Link>
             <span aria-hidden="true">·</span>
             <span>{article.format}</span>
             <span aria-hidden="true">·</span>
@@ -76,7 +86,9 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
           </div>
 
           <h3 className="font-editorial-serif text-xl sm:text-2xl font-medium tracking-tight text-[#1C1917] leading-snug group-hover:text-stone-700 transition-colors mb-3 line-clamp-2 text-balance">
-            {article.title}
+            <Link to={`/essay/${article.id}`} className="hover:underline">
+              {article.title}
+            </Link>
           </h3>
 
           <p className="text-sm text-stone-600 line-clamp-3 leading-relaxed mb-5 font-sans">
@@ -111,16 +123,19 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
         </div>
       </div>
 
-      {/* Card Footer with Byline & Arrow Action */}
+      {/* Card Footer with Byline & Semantic Link */}
       <div className="px-5 sm:px-6 pb-5 pt-3 border-t border-[#F0EBE2] flex items-center justify-between text-xs text-stone-600 font-sans">
         <div className="truncate pr-2">
           <span className="font-medium text-stone-900">{article.author.name}</span>
           <span className="text-stone-500 hidden sm:inline"> · {article.date}</span>
         </div>
-        <span className="flex items-center gap-1 font-medium text-stone-900 group-hover:text-stone-700 whitespace-nowrap shrink-0">
+        <Link
+          to={`/essay/${article.id}`}
+          className="flex items-center gap-1 font-medium text-stone-900 group-hover:text-stone-700 whitespace-nowrap shrink-0 hover:underline"
+        >
           <span>Read Paper</span>
           <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-        </span>
+        </Link>
       </div>
     </article>
   );

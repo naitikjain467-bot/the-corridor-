@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
-import { ArrowUpRight, Bookmark, Clock, User, Sparkles } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ArrowUpRight, Bookmark, Clock, Sparkles } from 'lucide-react';
 import { BlogArticle } from '../data/blogs.ts';
+import { categoryToSlug } from '../utils/slugs.ts';
 
 interface HeroLeadProps {
   article: BlogArticle;
-  onReadArticle: (article: BlogArticle) => void;
+  onReadArticle?: (article: BlogArticle) => void;
   isBookmarked: boolean;
-  onToggleBookmark: (id: string, e: React.MouseEvent) => void;
+  onToggleBookmark: (id: string, e?: React.MouseEvent) => void;
 }
 
 export const HeroLead: React.FC<HeroLeadProps> = ({
   article,
-  onReadArticle,
   isBookmarked,
   onToggleBookmark,
 }) => {
@@ -39,7 +40,12 @@ export const HeroLead: React.FC<HeroLeadProps> = ({
           <div className="lg:col-span-7 flex flex-col justify-center">
             {/* Unboxed Metadata (Zero Pill Discipline) */}
             <div className="flex items-center gap-2.5 text-xs text-stone-600 mb-4 font-sans">
-              <span className="font-medium text-stone-900">{article.category}</span>
+              <Link
+                to={`/category/${categoryToSlug(article.category)}`}
+                className="font-medium text-stone-900 hover:underline"
+              >
+                {article.category}
+              </Link>
               <span aria-hidden="true">·</span>
               <span>{article.date}</span>
               <span aria-hidden="true">·</span>
@@ -49,12 +55,14 @@ export const HeroLead: React.FC<HeroLeadProps> = ({
               </span>
             </div>
 
-            <h1
-              onClick={() => onReadArticle(article)}
-              className="font-editorial-serif text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-[#1C1917] leading-[1.12] mb-5 hover:text-stone-700 transition-colors cursor-pointer text-balance"
-            >
-              {article.title}
-            </h1>
+            <h2 className="font-editorial-serif text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-[#1C1917] leading-[1.12] mb-5 text-balance">
+              <Link
+                to={`/essay/${article.id}`}
+                className="hover:text-stone-700 transition-colors"
+              >
+                {article.title}
+              </Link>
+            </h2>
 
             <p className="text-base sm:text-lg text-stone-700 leading-relaxed font-sans mb-6 max-w-2xl">
               {article.subtitle}
@@ -110,22 +118,23 @@ export const HeroLead: React.FC<HeroLeadProps> = ({
                   <Bookmark className="w-4 h-4" />
                 </button>
 
-                <button
-                  onClick={() => onReadArticle(article)}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-[#FBF9F5] bg-[#1C1917] hover:bg-stone-800 rounded-md transition-all cursor-pointer group shadow-sm"
+                <Link
+                  to={`/essay/${article.id}`}
+                  className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-[#FBF9F5] bg-[#1C1917] hover:bg-stone-800 rounded-md transition-all group shadow-sm"
                 >
                   <span>Read Full Analytical Paper</span>
                   <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                </button>
+                </Link>
               </div>
             </div>
           </div>
 
-          {/* Right Column: High-Fidelity Lead Visual (5 cols) */}
+          {/* Right Column: High-Fidelity Lead Visual with Link */}
           <div className="lg:col-span-5">
-            <div
-              onClick={() => onReadArticle(article)}
+            <Link
+              to={`/essay/${article.id}`}
               className="group cursor-pointer block relative overflow-hidden rounded-lg border border-[#DDD7CC] shadow-md bg-[#EBE5DB]"
+              aria-label={article.title}
             >
               <div className="aspect-[4/3] w-full overflow-hidden relative">
                 {!imgError ? (
@@ -156,7 +165,7 @@ export const HeroLead: React.FC<HeroLeadProps> = ({
                   {article.caption}
                 </div>
               </div>
-            </div>
+            </Link>
           </div>
         </div>
       </div>
