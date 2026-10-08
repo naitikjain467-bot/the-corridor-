@@ -3,15 +3,23 @@ import { Link } from 'react-router-dom';
 import { ArrowLeft, BookOpen, ShieldCheck } from 'lucide-react';
 import { GLOSSARY_TERMS } from '../components/GlossaryModal.tsx';
 import { updatePageSEO } from '../utils/seo.ts';
+import { SITE_PAGE_KEYWORDS } from '../data/keywords.ts';
 
 export const LexiconPage: React.FC = () => {
   useEffect(() => {
-    updatePageSEO({
-      title: 'Cricket Analytics & Ballistics Lexicon',
-      description: 'Definitive scholarly glossary of modern cricket metrics: Expected Run Value (xRV), Gyroscopic Precession, Polar MOI, and Ground Reaction Forces.',
-      canonicalPath: '/lexicon',
-      type: 'website',
-    });
+    const lexKw = SITE_PAGE_KEYWORDS['/lexicon'];
+    if (lexKw) {
+      updatePageSEO({
+        title: lexKw.pageTitle,
+        description: lexKw.description,
+        canonicalPath: '/lexicon',
+        type: 'website',
+        keywords: {
+          main: lexKw.mainKeyword,
+          related: lexKw.relatedKeywords,
+        },
+      });
+    }
     window.scrollTo(0, 0);
   }, []);
 

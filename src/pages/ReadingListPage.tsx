@@ -4,6 +4,7 @@ import { ArrowLeft, Bookmark, BookOpen } from 'lucide-react';
 import { BLOG_ARTICLES } from '../data/blogs.ts';
 import { ArticleCard } from '../components/ArticleCard.tsx';
 import { updatePageSEO } from '../utils/seo.ts';
+import { SITE_PAGE_KEYWORDS } from '../data/keywords.ts';
 
 interface ReadingListPageProps {
   bookmarkedIds: string[];
@@ -15,12 +16,19 @@ export const ReadingListPage: React.FC<ReadingListPageProps> = ({
   onToggleBookmark,
 }) => {
   useEffect(() => {
-    updatePageSEO({
-      title: 'Saved Reading List',
-      description: 'Your curated list of saved cricket analytics monographs for offline review and deep study.',
-      canonicalPath: '/reading-list',
-      type: 'website',
-    });
+    const listKw = SITE_PAGE_KEYWORDS['/reading-list'];
+    if (listKw) {
+      updatePageSEO({
+        title: listKw.pageTitle,
+        description: listKw.description,
+        canonicalPath: '/reading-list',
+        type: 'website',
+        keywords: {
+          main: listKw.mainKeyword,
+          related: listKw.relatedKeywords,
+        },
+      });
+    }
     window.scrollTo(0, 0);
   }, []);
 

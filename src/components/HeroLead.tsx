@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowUpRight, Bookmark, Clock, Sparkles } from 'lucide-react';
 import { BlogArticle } from '../data/blogs.ts';
 import { categoryToSlug } from '../utils/slugs.ts';
+import { SITE_PAGE_KEYWORDS } from '../data/keywords.ts';
 
 interface HeroLeadProps {
   article: BlogArticle;
@@ -17,6 +18,7 @@ export const HeroLead: React.FC<HeroLeadProps> = ({
   onToggleBookmark,
 }) => {
   const [imgError, setImgError] = useState(false);
+  const keywords = SITE_PAGE_KEYWORDS[`/essay/${article.id}`];
 
   return (
     <section className="border-b border-[#E7E2D9] pb-12 pt-8">
@@ -64,9 +66,21 @@ export const HeroLead: React.FC<HeroLeadProps> = ({
               </Link>
             </h2>
 
-            <p className="text-base sm:text-lg text-stone-700 leading-relaxed font-sans mb-6 max-w-2xl">
+            <p className="text-base sm:text-lg text-stone-700 leading-relaxed font-sans mb-5 max-w-2xl">
               {article.subtitle}
             </p>
+
+            {/* Keyword Taxonomy */}
+            {keywords && (
+              <div className="flex flex-wrap items-center gap-2 text-xs text-stone-500 font-sans mb-6">
+                <span className="font-medium text-stone-800">Core Focus:</span>
+                <span className="text-stone-900 font-medium">{keywords.mainKeyword}</span>
+                <span aria-hidden="true">·</span>
+                <span>{keywords.relatedKeywords[0]}</span>
+                <span aria-hidden="true">·</span>
+                <span>{keywords.relatedKeywords[1]}</span>
+              </div>
+            )}
 
             {/* Key Data Previews (Tabular figures) */}
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 p-4 bg-[#F4EFE6] border border-[#E7E2D9] rounded-lg mb-7">
@@ -112,7 +126,7 @@ export const HeroLead: React.FC<HeroLeadProps> = ({
                       ? 'bg-stone-900 text-stone-100 border-stone-900'
                       : 'border-[#DED8CD] hover:bg-[#EFEBE4]'
                   }`}
-                  aria-label="Bookmark article"
+                  aria-label={isBookmarked ? `Remove ${article.title} from reading list` : `Save ${article.title} to reading list`}
                   title="Bookmark article"
                 >
                   <Bookmark className="w-4 h-4" />
@@ -129,18 +143,20 @@ export const HeroLead: React.FC<HeroLeadProps> = ({
             </div>
           </div>
 
-          {/* Right Column: High-Fidelity Lead Visual with Link */}
+          {/* Right Column: High-Fidelity Lead Visual with Small, Compact Framing */}
           <div className="lg:col-span-5">
             <Link
               to={`/essay/${article.id}`}
               className="group cursor-pointer block relative overflow-hidden rounded-lg border border-[#DDD7CC] shadow-md bg-[#EBE5DB]"
-              aria-label={article.title}
+              aria-label={`Read flagship monograph: ${article.title}`}
             >
-              <div className="aspect-[4/3] w-full overflow-hidden relative">
+              <div className="aspect-[16/10] max-h-72 w-full overflow-hidden relative">
                 {!imgError ? (
                   <img
                     src={article.image}
                     alt={article.imageAlt}
+                    loading="lazy"
+                    decoding="async"
                     referrerPolicy="no-referrer"
                     onError={() => setImgError(true)}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
@@ -165,6 +181,7 @@ export const HeroLead: React.FC<HeroLeadProps> = ({
                   {article.caption}
                 </div>
               </div>
+              <span className="sr-only">Read flagship monograph: {article.title}</span>
             </Link>
           </div>
         </div>

@@ -6,6 +6,7 @@ import { HeroLead } from '../components/HeroLead.tsx';
 import { ArticleCard } from '../components/ArticleCard.tsx';
 import { updatePageSEO } from '../utils/seo.ts';
 import { categoryToSlug, formatToSlug } from '../utils/slugs.ts';
+import { SITE_PAGE_KEYWORDS } from '../data/keywords.ts';
 
 interface HomePageProps {
   bookmarkedIds: string[];
@@ -21,12 +22,19 @@ export const HomePage: React.FC<HomePageProps> = ({
   const [selectedFormat, setSelectedFormat] = useState(searchParams.get('format') || 'all');
 
   useEffect(() => {
-    updatePageSEO({
-      title: 'The Corridor',
-      description: 'Peer-reviewed cricket analytics, biomechanical breakdowns, Hawk-Eye ball tracking data, and long-form tactical journalism across Test, ODI, and T20 cricket.',
-      canonicalPath: '/',
-      type: 'website',
-    });
+    const homeKw = SITE_PAGE_KEYWORDS['/'];
+    if (homeKw) {
+      updatePageSEO({
+        title: homeKw.pageTitle,
+        description: homeKw.description,
+        canonicalPath: '/',
+        type: 'website',
+        keywords: {
+          main: homeKw.mainKeyword,
+          related: homeKw.relatedKeywords,
+        },
+      });
+    }
   }, []);
 
   const filteredArticles = useMemo(() => {

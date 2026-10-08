@@ -53,9 +53,18 @@ export default function App() {
             }
           />
 
-          {/* Dedicated Individual Blog Article URL */}
+          {/* Dedicated Individual Blog Article URL (supporting both /essay/:slug and /blog/:slug) */}
           <Route
             path="/essay/:slug"
+            element={
+              <ArticlePage
+                bookmarkedIds={bookmarkedIds}
+                onToggleBookmark={toggleBookmark}
+              />
+            }
+          />
+          <Route
+            path="/blog/:slug"
             element={
               <ArticlePage
                 bookmarkedIds={bookmarkedIds}

@@ -5,6 +5,7 @@ import { BLOG_ARTICLES } from '../data/blogs.ts';
 import { ArticleCard } from '../components/ArticleCard.tsx';
 import { updatePageSEO } from '../utils/seo.ts';
 import { CATEGORY_MAP } from '../utils/slugs.ts';
+import { SITE_PAGE_KEYWORDS } from '../data/keywords.ts';
 
 interface CategoryPageProps {
   bookmarkedIds: string[];
@@ -17,20 +18,25 @@ export const CategoryPage: React.FC<CategoryPageProps> = ({
 }) => {
   const { catSlug } = useParams<{ catSlug: string }>();
   const categoryName = catSlug ? CATEGORY_MAP[catSlug] : undefined;
+  const keywordEntry = catSlug ? SITE_PAGE_KEYWORDS[`/category/${catSlug}`] : undefined;
 
   const articles = BLOG_ARTICLES.filter((a) => a.category === categoryName);
 
   useEffect(() => {
-    if (categoryName) {
+    if (categoryName && keywordEntry) {
       updatePageSEO({
-        title: `${categoryName} Research`,
-        description: `Explore scholarly cricket monographs and Hawkeye empirical studies in ${categoryName}.`,
+        title: keywordEntry.pageTitle,
+        description: keywordEntry.description,
         canonicalPath: `/category/${catSlug}`,
         type: 'website',
+        keywords: {
+          main: keywordEntry.mainKeyword,
+          related: keywordEntry.relatedKeywords,
+        },
       });
       window.scrollTo(0, 0);
     }
-  }, [categoryName, catSlug]);
+  }, [categoryName, catSlug, keywordEntry]);
 
   if (!categoryName) {
     return (

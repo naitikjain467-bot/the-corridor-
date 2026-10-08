@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useParams, Link } from 'react-router-dom';
 import {
   ArrowLeft,
   Bookmark,
@@ -12,9 +12,10 @@ import {
   Sparkles,
   BookOpen,
 } from 'lucide-react';
-import { BLOG_ARTICLES, BlogArticle } from '../data/blogs.ts';
+import { BLOG_ARTICLES } from '../data/blogs.ts';
 import { updatePageSEO } from '../utils/seo.ts';
 import { categoryToSlug } from '../utils/slugs.ts';
+import { SITE_PAGE_KEYWORDS } from '../data/keywords.ts';
 
 interface ArticlePageProps {
   bookmarkedIds: string[];
@@ -26,7 +27,6 @@ export const ArticlePage: React.FC<ArticlePageProps> = ({
   onToggleBookmark,
 }) => {
   const { slug } = useParams<{ slug: string }>();
-  const navigate = useNavigate();
   const [fontSize, setFontSize] = useState<'normal' | 'large' | 'editorial'>('normal');
   const [copiedLink, setCopiedLink] = useState(false);
   const [copiedCitation, setCopiedCitation] = useState(false);
@@ -34,6 +34,9 @@ export const ArticlePage: React.FC<ArticlePageProps> = ({
   const [imgError, setImgError] = useState(false);
 
   const article = BLOG_ARTICLES.find((a) => a.id === slug);
+  const keywordEntry = article
+    ? SITE_PAGE_KEYWORDS[`/essay/${article.id}`] || SITE_PAGE_KEYWORDS[`/blog/${article.id}`]
+    : undefined;
 
   // Sync scroll progress
   useEffect(() => {
@@ -48,23 +51,33 @@ export const ArticlePage: React.FC<ArticlePageProps> = ({
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Update SEO Title & Meta tags dynamically
+  // Update SEO Title (30-60 chars) & Meta Description (120-160 chars) & Keywords & AEO FAQ Schema
   useEffect(() => {
-    if (article) {
+    if (article && keywordEntry) {
+      const faqEntries = article.sections.map((s) => ({
+        question: s.heading,
+        answer: s.content[0].replace(/^Direct Answer:\s*/i, ''),
+      }));
+
       updatePageSEO({
-        title: article.title,
-        description: article.subtitle,
+        title: keywordEntry.pageTitle,
+        description: keywordEntry.description,
         canonicalPath: `/essay/${article.id}`,
         type: 'article',
         publishedTime: article.date,
         author: article.author.name,
         image: article.image,
+        keywords: {
+          main: keywordEntry.mainKeyword,
+          related: keywordEntry.relatedKeywords,
+        },
+        faqEntries,
       });
       window.scrollTo(0, 0);
     }
-  }, [article]);
+  }, [article, keywordEntry]);
 
-  if (!article) {
+  if (!article || !keywordEntry) {
     return (
       <div className="max-w-4xl mx-auto px-4 py-20 text-center">
         <BookOpen className="w-12 h-12 text-stone-400 mx-auto mb-4" />
@@ -123,7 +136,7 @@ export const ArticlePage: React.FC<ArticlePageProps> = ({
           style={{ width: `${scrollProgress}%` }}
         />
 
-        {/* Reader Top Utility Bar */}
+        {/* Reader Top Utility Bar with Real Anchor Text */}
         <div className="max-w-4xl mx-auto px-4 sm:px-6 py-2.5 flex items-center justify-between text-xs text-stone-600 font-sans">
           <div className="flex items-center gap-3">
             <Link
@@ -171,18 +184,19 @@ export const ArticlePage: React.FC<ArticlePageProps> = ({
               </button>
             </div>
 
-            {/* Bookmark */}
+            {/* Bookmark with Accessible Label */}
             <button
               onClick={(e) => onToggleBookmark(article.id, e)}
-              className={`p-1.5 rounded-md border text-stone-700 transition-colors cursor-pointer ${
+              className={`inline-flex items-center gap-1 px-2.5 py-1.5 rounded-md border text-stone-700 transition-colors cursor-pointer ${
                 isBookmarked
                   ? 'bg-stone-900 text-stone-100 border-stone-900'
                   : 'border-[#DDD7CC] hover:bg-[#EFEAE1]'
               }`}
-              title={isBookmarked ? 'Bookmarked' : 'Bookmark this monograph'}
-              aria-label="Save for later"
+              title={isBookmarked ? 'Bookmarked in reading list' : 'Bookmark this monograph'}
+              aria-label={isBookmarked ? 'Remove monograph from bookmarks' : 'Bookmark monograph'}
             >
               <Bookmark className="w-3.5 h-3.5" />
+              <span className="text-[11px] hidden md:inline">{isBookmarked ? 'Saved' : 'Save'}</span>
             </button>
 
             {/* Copy Shareable Unique URL */}
@@ -199,7 +213,7 @@ export const ArticlePage: React.FC<ArticlePageProps> = ({
               ) : (
                 <>
                   <Share2 className="w-3.5 h-3.5" />
-                  <span className="text-[11px] hidden sm:inline">Share URL</span>
+                  <span className="text-[11px]">Share URL</span>
                 </>
               )}
             </button>
@@ -207,13 +221,13 @@ export const ArticlePage: React.FC<ArticlePageProps> = ({
             {/* Academic Cite */}
             <button
               onClick={copyCitation}
-              className="inline-flex items-center gap-1 px-2 py-1.5 rounded-md border border-[#DDD7CC] hover:bg-[#EFEAE1] transition-colors cursor-pointer text-stone-700 text-[11px]"
+              className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-md border border-[#DDD7CC] hover:bg-[#EFEAE1] transition-colors cursor-pointer text-stone-700 text-[11px]"
               title="Copy academic citation"
             >
               {copiedCitation ? (
                 <span className="text-emerald-700">Cited!</span>
               ) : (
-                <span>Cite</span>
+                <span>Cite Monograph</span>
               )}
             </button>
           </div>
@@ -222,10 +236,10 @@ export const ArticlePage: React.FC<ArticlePageProps> = ({
 
       {/* Main Reading Container */}
       <div className="max-w-3xl mx-auto px-4 sm:px-6 md:px-8 py-10">
-        {/* Breadcrumb Hierarchy */}
+        {/* Breadcrumb Hierarchy with Anchor Text */}
         <nav aria-label="Breadcrumb" className="mb-6 text-xs text-stone-500 font-sans flex items-center gap-2">
           <Link to="/" className="hover:text-stone-900 transition-colors">
-            Home
+            Journal Home
           </Link>
           <span aria-hidden="true">/</span>
           <Link
@@ -238,8 +252,8 @@ export const ArticlePage: React.FC<ArticlePageProps> = ({
           <span className="text-stone-400 truncate max-w-xs">{article.id}</span>
         </nav>
 
-        {/* Unboxed Metadata (Zero-Pill Discipline) */}
-        <div className="flex flex-wrap items-center gap-2.5 text-xs text-stone-500 font-sans mb-4">
+        {/* Unboxed Metadata (Zero-Pill Discipline) with Anchor Text */}
+        <div className="flex flex-wrap items-center gap-2.5 text-xs text-stone-500 font-sans mb-3">
           <Link
             to={`/category/${categoryToSlug(article.category)}`}
             className="font-semibold text-stone-900 hover:underline uppercase tracking-wider"
@@ -258,16 +272,26 @@ export const ArticlePage: React.FC<ArticlePageProps> = ({
         </div>
 
         {/* Article Headline */}
-        <h1 className="font-editorial-serif text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight text-[#1C1917] leading-[1.14] mb-5 text-balance">
+        <h1 className="font-editorial-serif text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight text-[#1C1917] leading-[1.14] mb-4 text-balance">
           {article.title}
         </h1>
 
         {/* Deck Subtitle */}
-        <p className="text-lg sm:text-xl text-stone-600 font-sans leading-relaxed mb-8">
+        <p className="text-lg sm:text-xl text-stone-600 font-sans leading-relaxed mb-6">
           {article.subtitle}
         </p>
 
-        {/* Author Byline & Lab CTA */}
+        {/* Topical Keywords Index (Main Keyword + 2 Related Keywords) */}
+        <div className="flex flex-wrap items-center gap-2 text-xs text-stone-600 font-sans p-3 bg-[#F4EFE6] border border-[#E7E2D9] rounded-md mb-8">
+          <span className="font-semibold text-stone-900">Topical Keywords:</span>
+          <span className="text-stone-950 font-medium">{keywordEntry.mainKeyword}</span>
+          <span aria-hidden="true">·</span>
+          <span>{keywordEntry.relatedKeywords[0]}</span>
+          <span aria-hidden="true">·</span>
+          <span>{keywordEntry.relatedKeywords[1]}</span>
+        </div>
+
+        {/* Author Byline & Lab CTA with Anchor Text */}
         <div className="flex flex-wrap items-center justify-between gap-4 pb-8 mb-8 border-b border-[#E7E2D9]">
           <div className="flex items-center gap-3">
             <div className="w-11 h-11 rounded-full bg-stone-200 border border-stone-300 flex items-center justify-center text-stone-800 font-editorial-serif font-bold text-base">
@@ -289,25 +313,27 @@ export const ArticlePage: React.FC<ArticlePageProps> = ({
               className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-[#EFEAE1] hover:bg-[#E6E0D5] text-stone-900 rounded-md text-xs font-medium transition-colors border border-[#DDD7CC]"
             >
               <Sliders className="w-3.5 h-3.5 text-stone-700" />
-              <span>Simulate Trajectory</span>
+              <span>Simulate Delivery Trajectory</span>
             </Link>
           )}
         </div>
 
-        {/* High-Resolution Article Photography */}
-        <div className="mb-10">
-          <div className="aspect-[16/10] overflow-hidden rounded-lg border border-[#DDD7CC] bg-[#EAE4D9]">
+        {/* Small, Tastefully Sized Article Photography with Alt Text */}
+        <div className="mb-10 max-w-2xl mx-auto">
+          <div className="aspect-[16/10] max-h-72 sm:max-h-80 overflow-hidden rounded-lg border border-[#DDD7CC] bg-[#EAE4D9]">
             {!imgError ? (
               <img
                 src={article.image}
                 alt={article.imageAlt}
+                loading="lazy"
+                decoding="async"
                 referrerPolicy="no-referrer"
                 onError={() => setImgError(true)}
                 className="w-full h-full object-cover"
               />
             ) : (
-              <div className="w-full h-full bg-stone-900 p-8 flex flex-col justify-center text-stone-300">
-                <div className="font-editorial-serif text-2xl italic mb-2">
+              <div className="w-full h-full bg-stone-900 p-6 flex flex-col justify-center text-stone-300">
+                <div className="font-editorial-serif text-xl italic mb-2">
                   {article.title}
                 </div>
                 <div className="text-xs font-mono text-stone-500">
@@ -316,7 +342,7 @@ export const ArticlePage: React.FC<ArticlePageProps> = ({
               </div>
             )}
           </div>
-          <figcaption className="text-xs font-serif italic text-stone-500 mt-2.5 text-center">
+          <figcaption className="text-xs font-serif italic text-stone-500 mt-2 text-center">
             {article.caption}
           </figcaption>
         </div>
@@ -367,16 +393,35 @@ export const ArticlePage: React.FC<ArticlePageProps> = ({
                 <div className="w-12 h-0.5 bg-stone-300 mt-3" />
               </div>
 
-              {/* Paragraphs with Drop Cap on the first section */}
+              {/* Paragraphs with AEO Question-Answer Box on Paragraph 0 and Drop Cap */}
               <div className={`space-y-5 text-stone-800 font-sans ${getProseSizeClass()}`}>
-                {section.content.map((p, pIdx) => (
-                  <p
-                    key={pIdx}
-                    className={sIdx === 0 && pIdx === 0 ? 'drop-cap' : ''}
-                  >
-                    {p}
-                  </p>
-                ))}
+                {section.content.map((p, pIdx) => {
+                  if (pIdx === 0 && p.startsWith('Direct Answer:')) {
+                    const answerText = p.replace(/^Direct Answer:\s*/i, '');
+                    return (
+                      <div
+                        key={pIdx}
+                        className="my-5 p-5 bg-[#F6F1E7] border-l-4 border-[#1C1917] rounded-r-lg shadow-2xs"
+                      >
+                        <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-stone-600 mb-1.5 font-semibold">
+                          <span className="w-2 h-2 rounded-full bg-emerald-600 inline-block"></span>
+                          <span>AEO Answer Summary</span>
+                        </div>
+                        <p className="font-sans text-base sm:text-lg font-medium text-stone-900 leading-relaxed">
+                          {answerText}
+                        </p>
+                      </div>
+                    );
+                  }
+                  return (
+                    <p
+                      key={pIdx}
+                      className={sIdx === 0 && pIdx === 0 ? 'drop-cap' : ''}
+                    >
+                      {p}
+                    </p>
+                  );
+                })}
               </div>
 
               {/* Pull Quote */}
@@ -455,13 +500,13 @@ export const ArticlePage: React.FC<ArticlePageProps> = ({
           </ul>
         </div>
 
-        {/* Simulator Callout Footer */}
+        {/* Simulator Callout Footer with Anchor Text */}
         {article.simulationPreset && (
           <div className="mt-8 p-6 bg-[#F4EFE6] border border-[#E7E2D9] rounded-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div>
-              <h4 className="font-editorial-serif text-lg font-medium text-stone-900">
+              <h3 className="font-editorial-serif text-lg font-medium text-stone-900">
                 Test This Delivery In The Corridor Laboratory
-              </h4>
+              </h3>
               <p className="text-xs text-stone-600 font-sans">
                 Load this article's calibrated speed ({article.simulationPreset.speedKmph} km/h) and seam parameters in our real-time Hawkeye simulator.
               </p>
@@ -471,12 +516,12 @@ export const ArticlePage: React.FC<ArticlePageProps> = ({
               className="inline-flex items-center gap-2 px-4 py-2 bg-stone-900 hover:bg-stone-800 text-stone-100 rounded-md text-xs font-medium transition-colors shrink-0"
             >
               <Sliders className="w-3.5 h-3.5" />
-              <span>Launch Interactive Physics</span>
+              <span>Launch Interactive Physics Engine</span>
             </Link>
           </div>
         )}
 
-        {/* Prev / Next Article Navigation Footer */}
+        {/* Prev / Next Article Navigation Footer with Explicit Anchor Text */}
         <div className="mt-16 pt-8 border-t border-[#E7E2D9] grid grid-cols-1 sm:grid-cols-2 gap-4">
           {prevArticle ? (
             <Link

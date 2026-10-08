@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { ArrowLeft, RotateCcw, Share2, Check, Sliders, AlertCircle, CheckCircle2 } from 'lucide-react';
 import { updatePageSEO } from '../utils/seo.ts';
+import { SITE_PAGE_KEYWORDS } from '../data/keywords.ts';
 
 export const SimulatorPage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -22,12 +23,19 @@ export const SimulatorPage: React.FC = () => {
   const [pitchCondition, setPitchCondition] = useState<'Standard Test Track' | 'Subcontinent Turner' | 'Perth Bouncy' | 'Abrasive T20 Drop-in'>('Standard Test Track');
 
   useEffect(() => {
-    updatePageSEO({
-      title: 'Hawkeye Delivery Simulator & Trajectory Lab',
-      description: 'Interactive 22-yard physics simulator modeling ball release velocity, seam tilt angle, turf compression, and edge dismissal probability.',
-      canonicalPath: '/simulator',
-      type: 'website',
-    });
+    const simKw = SITE_PAGE_KEYWORDS['/simulator'];
+    if (simKw) {
+      updatePageSEO({
+        title: simKw.pageTitle,
+        description: simKw.description,
+        canonicalPath: '/simulator',
+        type: 'website',
+        keywords: {
+          main: simKw.mainKeyword,
+          related: simKw.relatedKeywords,
+        },
+      });
+    }
   }, []);
 
   // Sync to URL params whenever values change

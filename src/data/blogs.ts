@@ -22,9 +22,9 @@ export interface TableRow {
 }
 
 export interface ArticleSection {
-  heading: string;
+  heading: string; // Formulated as a direct question for AEO (Answer Engine Optimization)
   subheading?: string;
-  content: string[];
+  content: string[]; // Paragraph 0 directly provides the authoritative answer, followed by empirical proof
   pullQuote?: string;
   tableData?: {
     caption: string;
@@ -52,6 +52,10 @@ export interface BlogArticle {
   caption: string;
   abstract: string;
   metrics: MetricPoint[];
+  keywords: {
+    main: string;
+    related: [string, string];
+  };
   sections: ArticleSection[];
   conclusions: string[];
   simulationPreset?: {
@@ -78,7 +82,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       credentials: 'Lead Data Consultant, Hampshire & Global T20 Franchises',
     },
     image: imgFastBowler,
-    imageAlt: 'Fast bowler releasing a delivery under stadium lights with ballistics focus',
+    imageAlt: 'Fast bowler in mid-delivery stride releasing a red leather cricket ball under floodlights',
     caption: 'Figure 1.1 — Spatial trajectory tracking of yorker release vectors across 14,200 death deliveries in elite T20 play (2021–2026).',
     abstract: 'For four decades of white-ball cricket, the standard holy grail of death bowling was unyielding: land the leather ball into the subterranean crease trench at the base of off-and-middle stumps. However, comprehensive Hawkeye spatial analytics between 2021 and 2026 reveal a profound paradigm inversion. Batters clearing their front leg and deploying 360-degree bat ramps have converted traditional straight yorkers into high-leverage scoring channels. In response, modern pace attacks have engineered the "wide-line tramline gambit" and asymmetrical boundary-funneling vectors.',
     metrics: [
@@ -87,23 +91,27 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       { label: 'Margin of Error Window', value: '±6.2', unit: 'cm length', context: 'Threshold before turning into full toss' },
       { label: 'Boundary Concession Rate', value: '11.4%', unit: 'vs 22.8%', context: 'Wide line strategy vs base of stumps' },
     ],
+    keywords: {
+      main: 'death bowling yorker analytics',
+      related: ['T20 wide line strategy', 'expected run value xRV'],
+    },
     sections: [
       {
-        heading: 'The Erosion of the Base-of-Stumps Citadel',
-        subheading: 'Why modern front-leg clearing altered the leverage mechanics of straight yorkers',
+        heading: 'Why Has the Traditional Straight Yorker Lost Its Defensive Supremacy in Modern T20 Death Overs?',
+        subheading: 'Biomechanical analysis of front-leg clearing and expanded hitting arcs',
         content: [
+          'Direct Answer: The traditional straight yorker aimed at the base of the stumps has become statistically ineffective because modern batters aggressively pre-commit their front hip toward the leg side, expanding their bat swing arc from 110 degrees to over 240 degrees. This biomechanical shift transforms deliveries landing at the stumps into upward leverage levers that can easily be scooped or lofted over the boundary.',
           'Until the late 2010s, bowling coaches preached a singular doctrine for overs 18 through 20: aim at the base of off-stump, drill the toe of the bat, and rely on reverse-swing velocity. If the bowler hit within 15 centimeters of the popping crease at 140 km/h, run prevention was considered statistically guaranteed.',
-          'That certainty disintegrated under biomechanical evolution. Contemporary batters no longer stand parallel to the crease line; instead, they aggressively pre-commit their left hip into the deep leg-side pocket, effectively expanding their swing arc from 110 degrees to a full 240 degrees. By lowering their center of mass, batters create an upward lever that can shovel a 142 km/h yorker 85 meters over deep midwicket.',
           'When tracking 14,200 death deliveries across the Indian Premier League, Big Bash, and T20 World Cups, the data reveals an alarming truth: an accurately executed straight yorker now carries an expected run value of 0.94 runs per ball—acceptable, but when that delivery misses its target length by merely 8.5 centimeters full, the expected run value rockets to an unsustainable 2.18 runs per ball.',
         ],
         pullQuote: 'A missed straight yorker is the most expensive delivery in professional sports. A missed wide yorker is merely an extra run with zero boundary downside.',
       },
       {
-        heading: 'Hawkeye Trajectory Dissection: The 75cm Lateral Corridor',
-        subheading: 'Quantifying the geometrical impossibility of hitting the off-side tramline with power',
+        heading: 'How Does the 75cm Wide-Line Corridor Physically Starve Batters of Hitting Power?',
+        subheading: 'Anatomical constraints of full elbow extension and torso deceleration',
         content: [
+          'Direct Answer: Bowling in the 60cm to 75cm outside-off channel forces the batter to extend both elbows to maximum reach, which anatomically locks the wrists and reduces bat-speed at impact by an average of 34.2%. Because the batter cannot recruit ground-reaction force or rotate their core, they can only produce sliced aerial mishits toward deep backward point.',
           'To counter the batter clearing their front leg, bowling think-tanks shifted the ball’s terminal landing zone from middle stump outward toward the wide tramline—specifically targeting a corridor 60 to 75 centimeters outside off-stump.',
-          'The biomechanics of this corridor are brutally punishing for the batter. To make contact with a ball landing 70 centimeters outside off-stump, the batter must extend both elbows to maximum reach. This complete arm extension strips the wrists of their snapping torque, reducing bat-speed at impact by an average of 34.2%.',
           'Furthermore, because the batter’s weight has already drifted toward the leg side in anticipation of the straight ball, reaching for the wide line forces an emergency deceleration of their thoracic rotation. The batter can no longer generate ground-reaction force from the rear foot, resulting in sliced aerial balls toward deep cover-point—precisely where modern captains station their most reliable boundary catchers.',
         ],
         tableData: {
@@ -118,12 +126,12 @@ export const BLOG_ARTICLES: BlogArticle[] = [
         },
       },
       {
-        heading: 'The Knuckle-Seam Deceleration Coefficient',
-        subheading: 'Aerodynamics of cross-seam tumbling and late trajectory drop',
+        heading: 'Why Does the Finger-Retracted Knuckleball Produce an Unpredictable 18cm Vertical Plunge?',
+        subheading: 'Fluid aerodynamic drag boundary separation in zero-spin deliveries',
         content: [
-          'The second pillar of the modern death bowling revolution is the replacement of standard off-cutters with finger-retracted knuckleballs. When a bowler utilizes finger-pad friction to impart conventional off-spin on a seam, the batter can detect the revolutions through visual seam flutter at roughly 0.22 seconds into ball flight.',
+          'Direct Answer: The finger-retracted knuckleball plunges vertically by an extra 18 centimeters because eliminating rotational backspin causes premature aerodynamic boundary layer separation around the leather casing. As drag spikes sharply midway down the pitch, the ball drops rapidly beneath the batter\'s anticipated downswing plane.',
+          'When a bowler utilizes finger-pad friction to impart conventional off-spin on a seam, the batter can detect the revolutions through visual seam flutter at roughly 0.22 seconds into ball flight.',
           'In contrast, the true knuckleball utilizes the fingernails resting on the leather casing, eliminating rotational spin altogether. With an aerodynamic drag coefficient that suddenly spikes halfway down the 22-yard strip as the laminar boundary layer separates, the ball drops vertically by an extra 18 centimeters compared to conventional physics predictions.',
-          'Batters initiating an upward loft swing anticipate the ball reaching waist height based on its initial trajectory vector; instead, the knuckleball dives beneath the bat plane, eliciting top-edges and mistimed scuffs.',
         ],
       },
     ],
@@ -154,7 +162,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       credentials: 'PhD Sports Biomechanics (Loughborough), National Cricket Academy Consultant',
     },
     image: imgFastBowler,
-    imageAlt: 'Jasprit Bumrah bowling release mechanics and wrist snap',
+    imageAlt: 'Fast bowler bowling action release point with wrist cock and seam position',
     caption: 'Figure 2.1 — Kinetic transfer graph highlighting Bumrah’s atypical front-foot plant and hyperextension whip at ball release.',
     abstract: 'Jasprit Bumrah violates nearly every tenet of classical English pace coaching: an abbreviated stuttering eight-pace run-up, an almost stiff front knee, hyper-extended elbow release, and an unorthodox wrist cock that points inward. Yet, across all conditions—from the bouncy strips of Perth to the abrasive clay of Kanpur—his bowling average of under 21 in Test cricket stands as the most lethal in the modern era. This investigation examines the precise physics of his kinetic chain, ground reaction forces, and unique spatial release geometry.',
     metrics: [
@@ -163,24 +171,28 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       { label: 'Elbow Hyperextension Angle', value: '16.4°', unit: 'legal flexure', context: 'Whip-effect kinetic energy multiplier' },
       { label: 'Perceived Velocity Delta', value: '+6.2 km/h', unit: 'gun vs batter', context: 'Late acceleration perception by top-order batters' },
     ],
+    keywords: {
+      main: 'Jasprit Bumrah bowling action biomechanics',
+      related: ['ground reaction force cricket', 'hyperextended release angle'],
+    },
     sections: [
       {
-        heading: 'The Kinetic Contradiction of the Eight-Step Approach',
-        subheading: 'Generating 145 km/h without momentum build-up: Ground Reaction Force (GRF) analysis',
+        heading: 'How Does Jasprit Bumrah Generate 145 km/h Pace From an Abbreviated Eight-Step Run-Up?',
+        subheading: 'Ground Reaction Force (GRF) and front-knee bracing mechanics',
         content: [
-          'Classical bowling biomechanics posits that approximately 20% to 28% of a bowler’s release velocity is harvested directly from the linear momentum generated during an athletic 25-meter run-up (the archetype perfected by Michael Holding and Brett Lee). Bumrah generates almost none of this linear momentum. He ambles through five slow strides before taking three explosive acceleration steps into the crease.',
-          'Where does the velocity come from? High-resolution force plates embedded at the National Cricket Academy reveal that Bumrah’s front-foot plant generates a peak vertical Ground Reaction Force equivalent to 8.9 times his body weight—substantially higher than the fast-bowling average of 6.2x.',
+          'Direct Answer: Jasprit Bumrah produces elite 145 km/h pace without long running momentum by generating immense Ground Reaction Force—peaking at 8.9 times his body weight—through an unyielding 172-degree rigid front knee brace. This sudden biological collision acts as an immovable fulcrum, snapping his pelvis and thoracic spine through in under 42 milliseconds.',
+          'Classical bowling biomechanics posits that approximately 20% to 28% of a bowler’s release velocity is harvested directly from the linear momentum generated during an athletic 25-meter run-up. Bumrah generates almost none of this linear momentum. He ambles through five slow strides before taking three explosive acceleration steps into the crease.',
           'His front knee braces at an angle of 172 degrees (virtually straight), acting as an immovable fulcrum. When his forward velocity collides with this rigid biological pillar, his pelvis snaps through in under 42 milliseconds, transferring energy up into his thoracic spine with zero energy leakage.',
         ],
         pullQuote: 'Bumrah is not a catapult reliant on running momentum; he is a compound bow that loads maximum tension entirely within the final 0.15 seconds of delivery stride.',
       },
       {
-        heading: 'The Hyperextension Whip and Inward Wrist Cock',
-        subheading: 'Why his late release point robs top-order batters of critical reactionary saccades',
+        heading: 'Why Does Bumrah’s Forward Release Point Steal Critical Milliseconds from Batters?',
+        subheading: 'Spatial forward intrusion and saccadic ocular reaction thresholds',
         content: [
+          'Direct Answer: Bumrah releases the cricket ball approximately 35 centimeters further in front of the popping crease than standard tall seamers. This forward spatial intrusion shortens the ball\'s flight travel time to just 0.38 seconds, depriving opening batters of nearly 40 milliseconds—equivalent to an entire human ocular fixation—before bat downswing initiation.',
           'The centerpiece of Bumrah’s lethality is his release angle and arm position. Because his bowling arm stays straight rather than bending during the cocking phase, the moment of inertia is held at its absolute extreme until the final microsecond.',
-          'His wrist is not locked behind the seam in the classical Dennis Lillee fashion; instead, it is turned inward, facing midwicket. At the instant of ball release, his wrist performs a violent snap from inside to out, impartially driving the ball forward while imparting high backspin at over 2,280 RPM.',
-          'Crucially, Bumrah releases the ball approximately 35 centimeters further in front of the popping crease than a conventional tall seamer like Josh Hazlewood. At 142 km/h, this spatial compression reduces the travel time from release to the batter’s eyes to just 0.38 seconds. A human blink takes approximately 0.15 seconds; Bumrah effectively gives an opening batter less than two blinks to calculate trajectory, seam position, and swing direction.',
+          'His wrist is turned inward toward midwicket. At the instant of ball release, his wrist performs a violent snap from inside to out, impartially driving the ball forward while imparting high backspin at over 2,280 RPM.',
         ],
         tableData: {
           caption: 'Table 2: Kinematic Comparison: Bumrah vs Classical Fast Bowling Norms',
@@ -194,12 +206,12 @@ export const BLOG_ARTICLES: BlogArticle[] = [
         },
       },
       {
-        heading: 'The Reverse-Angle Outswinger to Left-Handers',
-        subheading: 'The mathematical impossibility of defending the ball that pitches on leg and hits off-stump',
+        heading: 'How Does Bumrah’s Reverse-Angle Outswinger Create Cognitive Overload for Left-Handers?',
+        subheading: 'Opposing spatial vectors between natural arm angle and turf seam deviation',
         content: [
+          'Direct Answer: The delivery creates cognitive sensory conflict because Bumrah bowls wide on the crease with an arm path that angles naturally in toward the left-hander\'s pads, triggering an automatic defensive bat closure toward midwicket. However, upright seam presentation cuts the ball sharply away upon pitch impact, completely beating the outside edge.',
           'Perhaps Bumrah’s crowning tactical achievement is his angle of attack against left-handed batters (exemplified by his dismissals of Ollie Pope, Shaun Marsh, and Alex Carey). Bowling from wide on the crease with his natural inward trajectory, the left-hander’s ocular cortex immediately registers a ball tracking toward their front pad or down the leg side.',
           'The batter closes their bat face to work the ball through midwicket. However, because Bumrah cuts his fingers across the seam at release with his upright wrist, the ball does not follow the arm angle. Upon striking the seam on a good length, it sharply cuts outward, defeating the outside edge and flattening off-stump.',
-          'This dual vector—an arm angle going one direction and seam deviation cutting the opposite way—represents the purest form of cognitive overload in elite sport.',
         ],
       },
     ],
@@ -230,7 +242,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       credentials: 'CricViz Contributor & Performance Specialist',
     },
     image: imgSpinGrip,
-    imageAlt: 'Detailed close-up grip of fingers releasing a cricket ball with pronounced seam',
+    imageAlt: 'Detailed close-up macro of cricket ball seam grip for mystery spin carrom ball',
     caption: 'Figure 3.1 — High-speed macro capture of mystery spin carrom-flick mechanics, showing finger-snap torque at point of separation.',
     abstract: 'For over a century, spin bowling was defined by the romantic virtues of flight, loop, drift, and dip. Bowlers like Bishan Bedi and Shane Warne tempted batters out of their crease by tossing the ball above the eyeline. In the high-velocity furnace of modern T20 leagues, however, traditional looping flight has become tactical suicide. Enter the era of the rapid mystery spinner: Rashid Khan, Sunil Narine, and Varun Chakaravarthy. This piece analyzes why release speeds above 95 km/h, finger flick releases, and flat trajectories dominate the shortest format.',
     metrics: [
@@ -239,24 +251,28 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       { label: 'Carrom Ball RPM', value: '2,420', unit: 'revs/min', context: 'Generated purely through index/thumb snap' },
       { label: 'Six Concession Delta', value: '-41.2%', unit: 'per 100 balls', context: 'Fast spin (>92km/h) vs classical loop (<84km/h)' },
     ],
+    keywords: {
+      main: 'T20 mystery spin bowling mechanics',
+      related: ['carrom ball revolutions RPM', 'rapid skid trajectory'],
+    },
     sections: [
       {
-        heading: 'The Eyeline Threshold and the Fallacy of Flight',
-        subheading: 'Why giving the ball air in T20 allows modern batters to execute 3D trajectory calculation',
+        heading: 'Why Has Looping Flight Been Displaced by Rapid Flat Trajectories in T20 Powerplays?',
+        subheading: 'Eliminating the 3D depth-calculation window on 65-meter boundaries',
         content: [
+          'Direct Answer: Looping flight has become obsolete in T20 because tossing the ball above eye height gives modern batters with thick-edged bats an extra 0.12 seconds to track the apex, step out of the crease, and launch the ball over short boundaries. Spinners who bowl flatter trajectories at 95 km/h eliminate this reactionary calculation window.',
           'In Test cricket, tossing the ball above the batter’s eyeline forces them to judge depth over time, encouraging lunges forward or nervous retreats. But in modern white-ball formats, where bats weigh 2lb 10oz with 42mm edges and boundary ropes are pulled in to 65 meters, floating the ball is an invitation to destruction.',
-          'When a ball loops above eye height, the batter gains an extra 0.12 seconds to track its apogee. This allows them to step out of their crease, intercept the ball before it lands, or adjust their downswing to muscle it over long-on.',
           'Modern analysts found that every 1 km/h drop in release speed below 90 km/h in T20 cricket increases the batter’s boundary percentage by an astonishing 1.8%. The conclusion was stark: slow spin is dead in the powerplay.',
         ],
         pullQuote: 'The moment a spinner loops the ball above the batter\'s eyeline on a flat pitch, they have surrendered mathematical control of the 22 yards.',
       },
       {
-        heading: 'Rashid Khan’s Arm Speed Invariance Principle',
-        subheading: 'How identical kinematics between leg-break and googly paralyse batter decision trees',
+        heading: 'How Does Rashid Khan Disguise the Googly Through Kinematic Arm-Speed Invariance?',
+        subheading: 'Identical 720 deg/sec rotational velocity between leg-break and wrong\'un',
         content: [
+          'Direct Answer: Rashid Khan prevents batters from decoding his spin direction because his bowling arm rotates at virtually identical angular velocities for both his stock leg-break (720°/sec) and his googly (718°/sec). Releasing both deliveries at 96 to 102 km/h leaves zero visual kinetic cues before ball pitch.',
           'What makes Rashid Khan the most economical bowler in T20 history is not the volume of turn he generates—he rarely turns the ball more than 2.8 degrees—but the absolute velocity of his action and the consistency of his arm speed.',
-          'Biomechanical tracking proves that Rashid releases his stock leg-break at an average arm angular velocity of 720 degrees per second, and his disguised googly at 718 degrees per second. To the human eye, there is zero perceptible kinetic tell.',
-          'Furthermore, he fires both deliveries at 96 to 102 km/h. At that pace, the ball reaches the pitch in less than 0.51 seconds. A batter cannot afford to wait for the ball to pitch to detect spin direction; if they wait for the pitch, the ball has already struck their pad before the bat can descend.',
+          'At that pace, the ball reaches the pitch in less than 0.51 seconds. A batter cannot afford to wait for the ball to pitch to detect spin direction; if they wait for the pitch, the ball has already struck their pad before the bat can descend.',
         ],
         tableData: {
           caption: 'Table 3: Trajectory & Outcome Profiles: Traditional Loop vs Modern Mystery Spin',
@@ -270,10 +286,11 @@ export const BLOG_ARTICLES: BlogArticle[] = [
         },
       },
       {
-        heading: 'The Carrom Ball: Micro-Flick Physics and Backspin Skid',
-        subheading: 'Why finger-flicked balls slide on flat pitches rather than grabbing the turf',
+        heading: 'What Physical Principles Allow the Finger-Flicked Carrom Ball to Skid Across Flat Pitches?',
+        subheading: 'Micro-flick gyro-spin and backspin hydroplaning mechanics',
         content: [
-          'The carrom ball, revived by Ajantha Mendis and perfected by Ravichandran Ashwin and Varun Chakaravarthy, operates on a totally different physical principle than the finger-spun off-break. Rather than gripping the seam with two fingers and turning the wrist, the ball is held between the thumb and middle finger and squeezed out like a carrom striker.',
+          'Direct Answer: The carrom ball skids rather than grabs because flicking the ball with the middle finger imparts backspin and gyro-spin simultaneously. Upon striking the hard clay pitch, backspin prevents the leather from biting into the turf, causing the ball to hydroplane low across the surface into the stumps.',
+          'Rather than gripping the seam with two fingers and turning the wrist, the ball is held between the thumb and middle finger and squeezed out like a carrom striker.',
           'This release imparts rapid backspin and sideways gyro-spin simultaneously. Because of the backspin, when the ball hits the polished surface of a T20 pitch, it does not bite into the clay and lose speed; instead, it hydroplanes across the pitch surface, picking up relative forward momentum and keeping low.',
         ],
       },
@@ -305,7 +322,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       credentials: 'Former Performance Analyst for ECB & Surrey CCC',
     },
     image: imgStadiumTwilight,
-    imageAlt: 'Panoramic historic cricket stadium bathed in dramatic evening twilight floodlights',
+    imageAlt: 'Panoramic Test cricket stadium under twilight floodlights during a fourth innings chase',
     caption: 'Figure 4.1 — Stadium atmosphere during a high-stakes fourth-innings run chase where tactical aggression alters fielding geometry.',
     abstract: 'When Brendon McCullum and Ben Stokes took charge of the England Test team in mid-2022, they initiated the most radical philosophical departure in modern red-ball history. Dubbed "Bazball," the approach was dismissed by traditionalists as reckless slogging that would inevitably collapse against elite pace attacks. Four years later, empirical analysis reveals a sophisticated economic game theory at work: by inflating the baseline run rate from 3.1 to 4.7 runs per over, England structurally dismantled the fourth-innings fielding geometry that had governed Test cricket for 145 years.',
     metrics: [
@@ -314,23 +331,27 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       { label: 'Boundary Percentage', value: '14.2%', unit: 'of all deliveries', context: 'Double the historical red-ball benchmark' },
       { label: 'Draw Probability Reduction', value: '-82.0%', unit: 'match outcomes', context: 'Converting draws into decisive outcomes' },
     ],
+    keywords: {
+      main: 'Bazball fourth innings Test match strategy',
+      related: ['run rate aggression index', 'field spreading geometry'],
+    },
     sections: [
       {
-        heading: 'Game Theory and the Elimination of the Draw',
-        subheading: 'Why maximizing the probability of a win justifies an elevated probability of defeat',
+        heading: 'How Does Modern Game Theory Justify Aggressive Fourth-Innings Test Match Chases?',
+        subheading: 'Treating match draws and losses as economically equivalent states',
         content: [
-          'In traditional Test match theory, the fourth innings was viewed through the prism of attrition. If a team was set 320 to win on day five, the default strategy was caution: preserve wickets in the morning session, score at 2.8 runs per over, and only accelerate if wickets remained in hand after tea. If things went wrong, you blocked out for a draw.',
-          'McCullum and Stokes introduced a binary payoff matrix. In their framework, a draw has an economic value indistinguishable from zero. If your objective function treats a draw and a loss as identical negative states, the optimal mathematical strategy is to maximize the single probability of winning, even if it marginally increases the risk of losing.',
+          'Direct Answer: Aggressive fourth-innings chases are mathematically justified under game theory by assigning zero utility to a drawn match. When the objective function treats a draw and a defeat identically, the optimal strategy is to maximize the single probability of victory by scoring at 4.7+ RPO, compressing targets before pitch cracks can produce unplayable deliveries.',
+          'In traditional Test match theory, the fourth innings was viewed through the prism of attrition. If a team was set 320 to win on day five, the default strategy was caution: preserve wickets in the morning session, score at 2.8 runs per over, and only accelerate if wickets remained in hand after tea.',
           'By scoring at 5 runs per over from ball one of a fourth-innings chase, England compresses a 75-over target of 375 into just 60 overs. This drastically reduces the time a deteriorating pitch has to produce unplayable deliveries.',
         ],
         pullQuote: 'If a pitch is going to produce a cracked demon delivery every 40 balls, the only logical defense is to score 50 runs before that delivery arrives.',
       },
       {
-        heading: 'The Field-Spreading Paradox: Neutralizing the Slip Cordon',
-        subheading: 'How relentless boundary striking forces captains to surrender attacking catching positions',
+        heading: 'Why Does Sustained 4.7 RPO Scoring Force Opposition Captains to Disband the Slip Cordon?',
+        subheading: 'Neutralizing the fast bowler’s primary mode of dismissal through boundary pressure',
         content: [
+          'Direct Answer: Relentless early boundaries force fielding captains to remove slips and post them as deep boundary sweepers to stop hemorrhaging runs. Once the slip cordon is disbanded, fast bowlers can no longer take edges on a good length, transforming attacking hunting spells into defensive containment.',
           'The greatest tactical vulnerability of a fast bowler in Test cricket is not a bad ball; it is having to bowl without slips. A fast bowler hunts outside off-stump because three slips and a gully are waiting to catch the resultant edge. That entire hunting ecosystem relies on the batter not scoring freely.',
-          'When Jonny Bairstow, Harry Brook, or Zak Crawley dispatch consecutive good-length balls through point and over mid-off for boundaries, the fielding captain faces an excruciating dilemma. If they keep four slips in place, the batter can rack up 30 runs in three overs. Panicked, captains inevitably pull two slips out and post them as deep boundary sweepers.',
           'The moment those slip fielders are removed, the fast bowler’s primary threat is eliminated. The bowler can now produce a dozen outside edges that safely roll through the vacant cordon for singles. The bowler stops attacking the stumps and starts bowling defensively.',
         ],
         tableData: {
@@ -345,9 +366,10 @@ export const BLOG_ARTICLES: BlogArticle[] = [
         },
       },
       {
-        heading: 'Psychological Fatigue and Captaincy Paralysis',
-        subheading: 'The cognitive load imposed on opposition captains facing 75-minute half-centuries',
+        heading: 'What Cognitive Overload Does Rapid 75-Minute Scoring Impose on Opposing Captains?',
+        subheading: 'Disrupting tactical review windows and defensive workload pacing',
         content: [
+          'Direct Answer: Scoring 80+ runs in the first hour destroys standard captaincy timelines, forcing opposition leaders into panicked, ball-by-ball defensive adjustments. This constant tactical agitation disorients bowlers, accelerates physical fatigue, and destroys pre-match bowling plans.',
           'Test captains are conditioned to operate on slow tactical timelines. A bowling change is typically given four to five overs to settle. Field adjustments are made over the course of a session.',
           'Bazball destroys this decision-making cadence. When a team scores 85 runs in the first 11 overs of a day, the opposition captain has no time to analyze bowler workloads or plan traps. They are forced into reactive damage control, changing fields after every ball, which disorients their bowlers and drains fielding concentration.',
         ],
@@ -380,7 +402,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       credentials: 'Imperial College London & ECB Pace Bowling Advisory Panel',
     },
     image: imgPitchView,
-    imageAlt: 'Overhead tactical pitch view with corridor lines and deviation markers',
+    imageAlt: 'Overhead view of cricket pitch crease and landing area in the corridor of uncertainty',
     caption: 'Figure 5.1 — High-speed pitch trajectory rendering mapping the 1.4-degree micro-deviation window upon wobble seam turf impact.',
     abstract: 'For over a century, the pinnacle of pace bowling craftsmanship was the conventional outswinger: an immaculate upright seam tilted at 20 degrees toward first slip, polished shiny side leading, carving through the atmosphere in an elegant aerodynamic banana arc. Yet across the last decade of Test cricket, masters of the craft—Pat Cummins, Mohammed Shami, Jasprit Bumrah, and Stuart Broad—systematically abandoned continuous conventional swing in favor of the "wobble seam." This paper explores the fluid mechanics and neuro-optical science that make the wobble seam nearly unplayable.',
     metrics: [
@@ -389,24 +411,28 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       { label: 'Unpredictability Index', value: '54.2%', unit: 'either direction', context: 'Bowler themselves cannot predict direction' },
       { label: 'Edge-to-Leave Ratio', value: '3.4 : 1', unit: 'good length', context: 'Batters forced into committing bat face' },
     ],
+    keywords: {
+      main: 'wobble seam cricket aerodynamics',
+      related: ['Duke ball seam precession', 'pitch impact micro-deviation'],
+    },
     sections: [
       {
-        heading: 'The Aerodynamic Limitation of Conventional Swing',
-        subheading: 'Why elite modern batters learned to decode conventional swing during early ball flight',
+        heading: 'Why Did Elite Fast Bowlers Abandon Conventional Outswing for the Wobble Seam?',
+        subheading: 'Ocular predictive tracking limitations of large in-flight curving arcs',
         content: [
+          'Direct Answer: Fast bowlers switched to the wobble seam because conventional swing begins curving 8 to 10 meters into ball flight, giving top-order batters sufficient visual tracking time to calculate the trajectory and leave the ball safely. The wobble seam travels straight in the air and moves only upon hitting the pitch, giving batters zero reaction time.',
           'To understand why fast bowlers transitioned to the wobble seam, one must understand how elite batters combat conventional swing. When Jimmy Anderson bowled his vintage outswinger, the ball began curving through the air at approximately 8 to 10 meters into its 20-meter flight.',
-          'Elite international batters possess extraordinary predictive visual tracking. By tracking the shiny side of the ball and its early atmospheric trajectory, their brains can calculate the curving arc well before the ball pitches. They can comfortably let the ball go outside off-stump or adjust their hands to follow the swing.',
           'Prodigious swing looks spectacular on television, but it often beats the bat by too much—missing both the edge and the stumps. What bowlers needed was a delivery that looked entirely straight in the air and only moved at the final split-second upon contact with the turf.',
         ],
         pullQuote: 'A ball that swings four inches in the air will miss the edge. A ball that travels laser-straight in the air and nips half an inch off the pitch will take the edge every single time.',
       },
       {
-        heading: 'The Physics of Seam Precession: Engineered Chaos',
-        subheading: 'How holding the ball with split fingers generates gyroscopic wobble',
+        heading: 'How Does Gyroscopic Seam Precession Create Unpredictable Lateral Deviation at Pitch Impact?',
+        subheading: 'Engineering chaotic airflow and random seam-to-cheek turf contact',
         content: [
+          'Direct Answer: Releasing the ball with split fingers imparts a conical 15-degree gyroscopic wobble that prevents laminar air separation in flight, keeping the ball trajectory dead straight. Upon pitch contact, it becomes a micro-physics coin toss: landing on the raised seam cuts the ball sharply, while landing on the smooth leather cheek skids straight through.',
           'The wobble seam delivery is bowled by placing the index and middle fingers slightly wider apart across the seam rather than directly on it, while tucking the thumb directly underneath. Upon release, instead of imparting pure backspin where the seam rotates like a clean circular saw, the bowler imparts a slight gyroscopic precession.',
-          'As the ball travels through the air at 138 km/h, the seam tilts and wobbles through an angle of approximately 15 degrees. Because the seam is wobbling, the airflow around the leather casing remains chaotic, preventing the formation of the asymmetric laminar boundary layer that creates swing. The ball flies through the air like a laser beam on a dead-straight line.',
-          'The magic happens at impact. When the ball hits the turf, it is entirely a matter of micro-physics whether it lands on the proud raised leather seam or the smooth leather cheek. If it lands on the seam, it cuts sharply off the pitch; if it lands on the cheek, it skids straight through.',
+          'As the ball travels through the air at 138 km/h, the seam tilts and wobbles through an angle of approximately 15 degrees. Because the seam is wobbling, the airflow around the leather casing remains chaotic, preventing the formation of the asymmetric laminar boundary layer that creates swing.',
         ],
         tableData: {
           caption: 'Table 5: Trajectory Metrics: Conventional Outswing vs Wobble Seam (Test Cricket Data)',
@@ -420,9 +446,10 @@ export const BLOG_ARTICLES: BlogArticle[] = [
         },
       },
       {
-        heading: 'The Mohammed Shami Seam Presentation Anomaly',
-        subheading: 'How the world\'s most perfect seam creates constant danger without bowler intent',
+        heading: 'Why Is Mohammed Shami’s Upright Seam Release Mathematically Impossible to Anticipate?',
+        subheading: 'Perpendicular seam impact angle creating dual-direction deviation lottery',
         content: [
+          'Direct Answer: Mohammed Shami’s release is unplayable because his wrist snaps the seam exactly perpendicular (90 degrees) to the pitch surface without any tilted bias. Because the bowler himself cannot predict whether the ball will nip inward or outward off the seam, the batter has zero probabilistic defense.',
           'Mohammed Shami represents the gold standard of seam presentation. His wrist release is so pure that the seam stands perfectly perpendicular to the pitch surface right up to the point of impact.',
           'Because the seam never tilts sideways during flight, it hits the pitch at an angle of 90 degrees. Even Shami himself admits he does not know whether the ball will nip back into the right-hander or straighten toward the slips. If the bowler cannot predict which way the ball will deviate, the batter has zero chance of pre-empting it.',
         ],
@@ -455,7 +482,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       credentials: 'BCCI High Performance Centre & IPL Batting Consultant',
     },
     image: imgBatterDrive,
-    imageAlt: 'Batsman executing an aggressive stroke with pristine technical balance',
+    imageAlt: 'Batsman playing front-foot shot with high elbow technique on turf pitch',
     caption: 'Figure 6.1 — Kinetic alignment during front-foot impact, illustrating center of mass distribution during horizontal-bat sweeps.',
     abstract: 'Historically, the sweep shot was viewed as an eccentric, high-risk recourse deployed primarily when conventional front-foot defense had failed. In modern cricket, however, the sweep family—traditional, reverse, paddle, slog, and switch-hit—has become the premier tactical weapon to dismantle elite spin bowling. By dropping the head below the bounce trajectory and striking the ball on a horizontal plane, modern batters systematically neutralize pitch turn, DRS ball tracking, and close-in catching fielders.',
     metrics: [
@@ -464,22 +491,26 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       { label: 'Reverse Sweep Boundary Rate', value: '28.4%', unit: 'scoring shots', context: 'Highest boundary efficiency against off-spin' },
       { label: 'Bat Presentation Angle', value: '142°', unit: 'horizontal sweep', context: 'Expanded sweet-spot surface area' },
     ],
+    keywords: {
+      main: 'reverse sweep shot mechanics',
+      related: ['DRS 3-meter LBW impact threshold', 'horizontal bat spin counter'],
+    },
     sections: [
       {
-        heading: 'Neutralizing the Pitch: Intercepting the Ball in Infancy',
-        subheading: 'Why playing the ball on the horizontal plane eliminates surface roughness and cracks',
+        heading: 'How Does Striking on the Horizontal Plane Neutralize Deteriorating Pitch Dust and Cracks?',
+        subheading: 'Intercepting the delivery in its post-bounce infancy before lateral deviation completes',
         content: [
+          'Direct Answer: The sweep shot negates pitch deterioration by intercepting the spinning ball within 30 to 45 centimeters of pitching. By smothering the ball immediately as it leaves the turf, the batter neutralizes over 80% of lateral surface turn before rough cracks can alter trajectory.',
           'When playing a spinner with a vertical bat (the textbook forward defensive), the batter waits for the ball to pitch, observe how much it turns, and then present the face of the bat. On a turning day-four pitch with footmarks and dust, this gives the surface maximum opportunity to deceive the edge.',
-          'The sweep shot solves this problem by intercepting the ball at its earliest possible post-bounce window—often within 30 to 45 centimeters of pitching. By smothering the ball right as it leaves the turf, the batter negates 80% of the lateral turn that would have occurred had the ball traveled another two meters.',
           'Furthermore, because the bat swings horizontally like a broom, its cross-sectional hitting zone covers a wider horizontal band than a vertical bat blade, drastically reducing the likelihood of being beaten on the outside edge.',
         ],
         pullQuote: 'The forward defense is a negotiation with the pitch. The sweep is an executive override that takes the pitch completely out of the equation.',
       },
       {
-        heading: 'The DRS Geometry Hack: Distance from Stumps',
-        subheading: 'How stretching three meters down the wicket protects batters from LBW dismissals',
+        heading: 'How Do Batters Exploit the DRS Three-Meter Rule to Protect Against LBW Decisions?',
+        subheading: 'Hawk-Eye predictive path uncertainty thresholds at extreme forward reaches',
         content: [
-          'Under the ICC Decision Review System (DRS), if a batter is struck on the pad more than three meters away from the stumps, the Hawk-Eye tracking algorithm triggers a high-uncertainty protocol, making it nearly impossible for the third umpire to overturn an on-field "not out" decision.',
+          'Direct Answer: Under ICC DRS protocols, when pad impact occurs 3.0 meters or more from the stumps, Hawk-Eye triggers a high-uncertainty margin that prevents overturning on-field Not Out decisions. Batters who lunge forward on the sweep ensure their front pad impacts beyond 3 meters, rendering them mathematically immune to plumb LBWs.',
           'Modern batters, led by Joe Root and Glenn Maxwell, intentionally stride as far forward as possible when executing the sweep. When their front pad lands 3.2 meters from the stumps, they know that even if the ball strikes their pad plumb in front of middle stump, ball-tracking will register the projection as inconclusive or hitting umpire’s call.',
         ],
         tableData: {
@@ -494,9 +525,10 @@ export const BLOG_ARTICLES: BlogArticle[] = [
         },
       },
       {
-        heading: 'The Reverse Sweep as an Asymmetry Disrupter',
-        subheading: 'Forcing the off-spinner to bowl to a field that doesn’t exist',
+        heading: 'Why Does the Reverse Sweep Structurally Break Traditional Off-Spin Fielding Geometry?',
+        subheading: 'Accessing vacant third man corridors against packed leg-side field cordons',
         content: [
+          'Direct Answer: Off-spinners bowl with five fielders packed on the leg side, leaving the off side unprotected. The reverse sweep switches the hitting plane across to third man, converting what should be the bowler\'s safest defensive dot-ball line into effortless boundary runs with no fielders to stop them.',
           'An off-spinner bowling to a right-hander is taught to pack the leg side with five fielders: short leg, square leg, midwicket, deep backward square, and long-on. The off side is left bare, protected by only two fielders.',
           'By executing the reverse sweep, the batter turns the off side into their primary hitting zone. A delivery aimed outside off-stump—traditionally the bowler\'s safest dot-ball line—becomes an effortless boundary through third man. The bowler is left with nowhere to hide.',
         ],
@@ -529,7 +561,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       credentials: 'MS Analytics (MIT), Strategic Consultant to Major League Cricket & IPL',
     },
     image: imgStadiumTwilight,
-    imageAlt: 'High-octane T20 match under stadium lights with large scoreboard tracking run rates',
+    imageAlt: 'High-intensity T20 cricket night match under bright stadium lights',
     caption: 'Figure 7.1 — Run-expectancy surface mapping the terminal inning totals as a function of top-order strike-rate deciles.',
     abstract: 'For the first fifteen years of T20 cricket, coaches relied on the "anchor" blueprint: one top-order batter plays through the 20 overs, scoring a respectable 65 off 50 balls (Strike Rate 130), while explosive hitters bat around them. Today, advanced Markov chain run-expectancy models prove that this philosophy is not just suboptimal; in matches where the par score exceeds 190, the classical anchor actively harms their team’s win probability. This paper quantifies the exact tipping point where wicket preservation becomes a value-destroying liability.',
     metrics: [
@@ -538,25 +570,30 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       { label: 'Wicket Equity Cost', value: '0.42', unit: 'balls/wicket', context: 'Cost of losing a wicket in modern deep lineups' },
       { label: 'Boundary Threshold', value: '24.2%', unit: 'minimum rate', context: 'Required boundary frequency for 200+ team totals' },
     ],
+    keywords: {
+      main: 'T20 batting strike rate analytics',
+      related: ['Markov chain run expectancy', 'anchor role depreciation'],
+    },
     sections: [
       {
-        heading: 'The Fallacy of Wicket Preservation in 120-Ball Economics',
-        subheading: 'Why having unused wickets at the end of 20 overs is an economic deadweight loss',
+        heading: 'Why Is Wicket Preservation Counterproductive in 120-Ball T20 Match Economics?',
+        subheading: 'Unused wicket equity as economic deadweight loss in finite over formats',
         content: [
+          'Direct Answer: Wicket preservation in T20s is economically wasteful because teams possess 10 wickets to expend across merely 120 balls—12 deliveries per wicket. Finishing 185 for 3 means 4 wickets were wasted in the dugout while slow anchor deliveries deprived lower-order power hitters of scoring upside.',
           'In 50-over ODI cricket, wickets are scarce resources. If you lose all ten wickets in 35 overs, you fail to utilize 90 balls of scoring potential. Therefore, anchoring has undeniable economic value in 50-over cricket.',
-          'In T20 cricket, however, teams have ten wickets to burn across merely 120 legal deliveries—an abundance of 12 balls per wicket. Historical analysis of over 3,000 professional T20 matches shows that winning teams finish their innings with an average of 4.2 wickets still unspent in the dugout.',
-          'Leaving wickets unused at the end of an innings is the equivalent of leaving money in your bank account when your goal is to spend maximum capital before midnight. Every ball consumed by a batter striking at 130 is a ball denied to power hitters lower in the order who strike at 180.',
+          'In T20 cricket, however, winning teams finish their innings with an average of 4.2 wickets still unspent in the dugout. Leaving wickets unused at the end of an innings is the equivalent of leaving money in your bank account when your goal is to spend maximum capital before midnight.',
         ],
         pullQuote: 'A team that finishes 185 for 3 in a T20 match has not played well; they have committed a tragic crime of resource underutilization.',
       },
       {
-        heading: 'Markov Decision Process: Simulating 10,000 Innings',
-        subheading: 'Quantifying the expected runs of 50 off 38 balls versus 30 off 14 balls',
+        heading: 'What Do Markov Decision Process Simulations Reveal About Anchors Versus Disruptors?',
+        subheading: 'Simulating 10,000 innings comparing 50 off 40 balls vs 32 off 18 balls',
         content: [
+          'Direct Answer: Markov decision process simulations across 10,000 innings prove that high-intent disruptors (32 off 18 balls) generate an average team total of 208.4 runs, compared to only 188.6 runs for traditional anchors (52 off 40 balls). The extra 22 balls saved allow lower-order hitters to face more deliveries and elevate team totals.',
           'Using Markov chain transition matrices parameterized by historical ball-by-ball IPL data, we simulated 10,000 innings comparing two top-order archetypes:',
           'Archetype A: The Classical Anchor who scores 52 off 40 balls (SR 130) with an 85% probability of not being dismissed.',
           'Archetype B: The High-Intent Disruptor who scores 32 off 18 balls (SR 177) but has a 45% probability of being dismissed.',
-          'The results were definitive: teams fielding Archetype B averaged a total of 208.4 runs per innings, compared to just 188.6 runs for teams fielding Archetype A. The extra 22 balls saved by Archetype B’s early dismissal allowed lower-order hitters to face more deliveries, driving overall team run production through the roof.',
+          'The results were definitive: teams fielding Archetype B averaged a total of 208.4 runs per innings, compared to just 188.6 runs for teams fielding Archetype A.',
         ],
         tableData: {
           caption: 'Table 7: Markov Simulation Outputs: Team Totals by Top-Order Batting Strategy',
@@ -570,11 +607,11 @@ export const BLOG_ARTICLES: BlogArticle[] = [
         },
       },
       {
-        heading: 'The Impact Player Rule as the Final Nail in the Coffin',
-        subheading: 'Deepening batting lineups to number 9 makes wicket preservation completely obsolete',
+        heading: 'How Did the Impact Player Rule Further Diminish the Value of Top-Order Accumulators?',
+        subheading: 'Lineup expansion to number 9 removing collapse penalties',
         content: [
+          'Direct Answer: The Impact Player rule functionally expanded batting orders to nine specialized hitters deep, completely removing the fear of early batting collapses. When number 8 hitters boast career strike rates above 160, top-order batters consuming deliveries at 130 SR inflict an active 15-run penalty on team totals.',
           'The introduction of the Impact Player substitution in leagues like the IPL functionally expanded batting lineups to nine deep. With frontline hitters like Andre Russell or Pat Cummins walking in at number 8, the fear of an early batting collapse has vanished.',
-          'When your number 8 boasts a career T20 strike rate of 165, demanding that your opening batter "take their time and build an innings" is mathematically indefensible.',
         ],
       },
     ],
@@ -605,7 +642,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       credentials: 'Lead Data Consultant, Hampshire & Global T20 Franchises',
     },
     image: imgFastBowler,
-    imageAlt: 'Fast bowler release stride showing wide crease angle attack vector',
+    imageAlt: 'Fast bowler delivering with high wide arm release angle over the wicket',
     caption: 'Figure 8.1 — Spatial flight projection of left-arm over delivery angles showing right-hander visual occlusion blindspots.',
     abstract: 'In the history of the sport, right-handed bowlers outnumber left-handed bowlers by roughly four to one. Yet in ICC tournaments, powerplay strike-rates, and historic opening-over dismissals, elite left-arm pacers (Wasim Akram, Mitchell Starc, Trent Boult, Shaheen Shah Afridi) exert a disproportionate stranglehold over right-handed opening batters. Data shows left-arm quicks generate a 38% higher rate of bowled and LBW dismissals in the opening two overs of an innings. This article breaks down the optical and geometric reasons behind this enduring phenomenon.',
     metrics: [
@@ -614,22 +651,26 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       { label: 'Front-Pad Occlusion Time', value: '0.18 s', unit: 'blind spot', context: 'Ball hides behind batter\'s own knee roll' },
       { label: 'First Over Dismissal Rate', value: '1 in 4.8', unit: 'matches', context: 'Starc & Shaheen combined career record' },
     ],
+    keywords: {
+      main: 'left arm fast bowler release angle',
+      related: ['opening over powerplay dismissals', 'saccadic eye tracking blindspot'],
+    },
     sections: [
       {
-        heading: 'The Geometry of the Natural Angle Across the Batter',
-        subheading: 'Why right-handed batters spend their formative years calibrated to the wrong diagonal',
+        heading: 'Why Do Right-Handed Openers Struggle Disproportionately Against Left-Arm Pace Angles?',
+        subheading: 'Decades of optical Pavlovian conditioning to right-arm diagonal corridors',
         content: [
+          'Direct Answer: Right-handed batters struggle because over 80% of deliveries faced across their formative careers originate from the right side of their field of view. A left-armer releasing from 1.8 meters wide on the left disrupts this deeply conditioned ocular tracking pathway, forcing early front-foot commitments across the stumps.',
           'Because 80% of bowlers are right-handed, an aspiring right-handed batter faces hundreds of thousands of balls that travel from the right side of their field of view inward toward their off-stump. Their ocular tracking system is deeply calibrated to this specific parabolic corridor.',
           'When a left-arm bowler charges in over the wicket, the release point is shifted two meters to the left of the batter\'s standard visual anchor. The ball starts wide and angles naturally across the batter from leg stump toward fourth slip.',
-          'This natural diagonal forces the batter to make a fateful cognitive choice: they must commit their front foot along the line of the angle to defend their off-stump. The moment they commit their front foot across toward the off side, they walk straight into the bowler’s trap.',
         ],
         pullQuote: 'The left-armer does not defeat you with the ball that angles across; they defeat you by making you fear the angle, so you freeze when the ball swings back in.',
       },
       {
-        heading: 'The Fatal Late In-Ducker: Double Spatial Vector',
-        subheading: 'How swing that opposes arm angle destroys the batter\'s hand-eye coordination',
+        heading: 'How Does the Inswinging Delivery Defeat Batters by Opposing the Natural Arm Trajectory?',
+        subheading: 'Mid-flight motor reaction failure against contradictory spatial vectors',
         content: [
-          'The true masterpiece of left-arm bowling is the ball that swings into the right-hander (Shaheen Afridi to Rohit Sharma in 2021, or Mitchell Starc to Brendon McCullum in the 2015 World Cup Final).',
+          'Direct Answer: The late in-ducker defeats batters because the ball begins on an outward diagonal path toward third slip, triggering the batter’s hands to reach out. When late aerodynamic swing suddenly cuts back inward into the pads, the human motor cortex cannot recalculate and abort the downswing in the remaining 0.18 seconds.',
           'The ball is released from wide of the crease, creating an initial trajectory heading outside off-stump. The batter’s eyes register this outward path and signal the hands to reach outward. But halfway down the pitch, the upright seam catches the air and begins swinging back in toward middle and leg.',
           'To survive this delivery, the batter must make a mid-stride micro-adjustment, pulling their bat back inside their front pad while changing their downswing path. Because human motor response requires at least 0.20 seconds, the ball hits the inside edge or smashes into the front pad before the adjustment can be completed.',
         ],
@@ -645,11 +686,11 @@ export const BLOG_ARTICLES: BlogArticle[] = [
         },
       },
       {
-        heading: 'Pad Placement and the Front-Foot Occlusion Blindspot',
-        subheading: 'Why planting the front foot too early physically blocks the batter\'s sight of the ball',
+        heading: 'What Ocular Blindspots Occur When a Batter Takes a Large Forward Stride Against Left-Armers?',
+        subheading: 'Front knee roll and helmet peak visual occlusion dynamics',
         content: [
+          'Direct Answer: Eye-tracking testing proves that taking a large front-foot stride causes the batter’s own front shoulder, helmet visor, and front knee roll to physically block line of sight for 40 milliseconds as the ball ducks back in. By the time the ball re-emerges from this anatomical blindspot, impact with pad or stump is 0.05 seconds away.',
           'High-speed eye-tracking goggles worn by top-order batters in laboratory testing reveal an extraordinary physical limitation: when a right-handed batter takes a large stride forward to combat a left-armer, their own helmet visor and front shoulder briefly occlude the ball as it swings back into their pads.',
-          'For a window of roughly 40 milliseconds, the ball vanishes into the blind spot created by the batter’s front knee roll. By the time the ball re-emerges, it is 0.05 seconds from shattering off-stump.',
         ],
       },
     ],
@@ -680,7 +721,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       credentials: 'Former Performance Analyst for ECB & Surrey CCC',
     },
     image: imgSlipCordon,
-    imageAlt: 'Test match slip cordon fielders crouching with high intensity during overs',
+    imageAlt: 'Test cricket fielders crouching in the slip cordon waiting for an outside edge',
     caption: 'Figure 9.1 — Cordon density and spatial dispersion tracking showing how subtle fielding shifts alter batter subconscious shot selection.',
     abstract: 'Field settings are often viewed as passive reactions to where a batter hits the ball: if a batter cuts, you post a third man; if they drive, you place a cover. In modern analytical cricket, field settings have evolved into active psychological traps designed to manipulate the batter’s weight transfer. By strategically leaving appetizing gaps or positioning fielders in non-traditional catching spots (such as the short mid-wicket trap or the straightish extra-cover), captains bait batters into playing against the pitch conditions.',
     metrics: [
@@ -689,23 +730,27 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       { label: 'Bait Gap Boundary Conversion', value: '72.0%', unit: 'trap success', context: 'Batters targeting deliberately open gaps' },
       { label: 'Catch Probability Index', value: '0.84', unit: 'deep backward point', context: 'Optimal catching depth for upper-cut shots' },
     ],
+    keywords: {
+      main: 'Test match cricket fielding strategy',
+      related: ['short mid-wicket trap', 'computer vision catch probability'],
+    },
     sections: [
       {
-        heading: 'The Short Mid-Wicket Citadel: Pat Cummins’ Masterclass',
-        subheading: 'How Australia turned an empty patch of grass into the deadliest trap in Test cricket',
+        heading: 'How Does Stationing a Short Mid-Wicket at 12 Meters Induce Costly Leading Edges?',
+        subheading: 'Exploiting sluggish turf hold and closing the off-side scoring avenues',
         content: [
+          'Direct Answer: Posting a short mid-wicket at 12 meters alongside tight off-stump cutters starves the batter of scoring room through the covers. When the frustrated batter attempts to work the ball through midwicket, the holding pitch causes the bat face to close prematurely, resulting in a gentle leading edge straight into the fielder\'s hands.',
           'In the 2023 World Cup Final in Ahmedabad and throughout the subsequent Ashes series, Australia’s captain Pat Cummins showcased one of the most effective tactical fielding maneuvers of the decade: the suffocating short mid-wicket.',
           'Normally, mid-wicket stands 25 to 30 meters from the bat to stop the single. Cummins moved this fielder to just 12 meters from the batter, stationed directly in front of square on the leg side. Simultaneously, he instructed his bowlers to bowl back of a length on off-stump with cutters, denying the batter room to cut.',
-          'Frustrated by the inability to score on the off side, batters naturally attempt to flick or work the ball through the vacant midwicket region. Because the ball is holding in the surface, the bat face turns slightly early, resulting in a leading edge that floats gently into the hands of the short mid-wicket fielder.',
         ],
         pullQuote: 'A great captain does not put fielders where the ball has gone; they put fielders where the batter\'s panic will force the ball to go.',
       },
       {
-        heading: 'Computer Vision Catch Probability Heatmaps',
-        subheading: 'Calculating the exact coordinates where airborne edges land off 140 km/h bowling',
+        heading: 'How Do Computer Vision Heatmaps Optimize Slip Cordon Depth Across Variable Pitches?',
+        subheading: 'Calculating Gaussian probability landing zones for 140 km/h edges',
         content: [
+          'Direct Answer: Computer vision algorithms analyze bowler release velocity and turf rebound elasticity to place slips at the precise depth where edges carry. On hard, bouncy Perth pitches, slips stand 24 meters behind the stumps; on sluggish Colombo surfaces, slips must advance to 16 meters to prevent dying edges.',
           'Modern fielding positioning is guided by computer vision tracking from thousands of match hours. Data reveals that outside edges do not land uniformly across the slip cordon; their landing distribution forms a Gaussian bell curve centered between second slip and gully.',
-          'By analyzing bowler velocity and pitch bounce elasticity, analytics teams compute the exact distance behind the stumps where the slips should stand. On a fast Perth pitch, first slip must stand 24 meters behind the stumps to allow adequate reaction time; on a sluggish Colombo pitch, standing further than 16 meters ensures edges fall short of the cordon.',
         ],
         tableData: {
           caption: 'Table 9: Catch Conversion Rates by Non-Traditional Field Positions (2022–2026)',
@@ -719,11 +764,11 @@ export const BLOG_ARTICLES: BlogArticle[] = [
         },
       },
       {
-        heading: 'The Leg-Side Funnel: Weaponizing the Bouncer Rule',
-        subheading: 'How England and New Zealand dismantled subcontinental top orders with four catchers behind square',
+        heading: 'What Biomechanical Responses Does the Short-Pitched Leg-Side Funnel Exploit?',
+        subheading: 'Weaponizing involuntary self-preservation reflexes at 145 km/h',
         content: [
+          'Direct Answer: Packing four fielders behind square on the leg side while bowling at the batter\'s ribs exploits the involuntary human fend reflex. When facing 145 km/h aimed at the throat, batters cannot control the bat face, invariably spooning ballooned catches off the glove to leg gully or short leg.',
           'By packing four fielders behind square on the leg side (leg slip, backward short leg, deep backward square, and fine leg) and bowling short into the batter\'s armpit, fielding sides have engineered the "leg-side funnel."',
-          'A batter facing 145 km/h aimed at their throat has only two biological responses: duck or fend. Fending invariably results in the ball ballooning off the glove or bat shoulder into the waiting hands of leg gully or short leg.',
         ],
       },
     ],
@@ -754,7 +799,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       credentials: 'PhD Sports Biomechanics (Loughborough), National Cricket Academy Consultant',
     },
     image: imgWillowBat,
-    imageAlt: 'Handcrafted Grade 1 English Willow cricket bat showcasing thick edges and pristine wood grain',
+    imageAlt: 'Handcrafted Grade 1 English Willow cricket bat showing clean wood grain and thick edges',
     caption: 'Figure 10.1 — Microscopic cross-section of Salix alba caerulea wood grain showing pressed cellular compression and rebound elasticity.',
     abstract: 'In the 1970s, legendary batters like Clive Lloyd and Viv Richards used bats weighing between 2lb 6oz and 2lb 8oz, with delicate 18mm edges. If a batter in 1975 mis-timed a drive off the outside edge, the ball would gently loop to point or slip. In modern cricket, a mis-hit off the toe or edge of a bat frequently sails 75 meters into the second tier of the grandstand. This paper examines the material science of English Willow (Salix alba caerulea), cold-pressing roller physics, and how modern bat profiles transformed the sport.',
     metrics: [
@@ -763,22 +808,26 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       { label: 'Effective Sweet Spot Area', value: '+84%', unit: 'expanded zone', context: 'Forgiving response on off-center hits' },
       { label: 'Bat Density Compression', value: '280 psi', unit: 'pressing roller', context: 'Optimal cellular tension balance' },
     ],
+    keywords: {
+      main: 'English Willow cricket bat physics',
+      related: ['42mm bat edge moment of inertia', 'coefficient of restitution willow'],
+    },
     sections: [
       {
-        heading: 'Salix Alba Caerulea: The Cellular Miracle of English Willow',
-        subheading: 'Why no synthetic material—from carbon fiber to titanium—has ever surpassed wood',
+        heading: 'Why Has No Synthetic Composite Material Ever Surpassed English Willow in Bat Performance?',
+        subheading: 'Microscopic cellulose hydraulic damping in Salix alba caerulea',
         content: [
-          'Every professional cricket bat on the planet is crafted from a single species of tree: Salix alba caerulea, grown primarily in the wetlands of Essex and Suffolk in eastern England. The wood possesses a unique cellular structure consisting of long, hollow microscopic cellulose tubes bonded by lignin.',
-          'When a 140 km/h cricket ball strikes the wood, these hollow tubes act like millions of microscopic hydraulic shock absorbers. They compress inward by up to 25% of their diameter, storing kinetic energy, before instantly springing back to propel the ball forward.',
+          'Direct Answer: English Willow remains unmatched because its cellular structure consists of long, hollow microscopic cellulose tubes bonded by elastic lignin. These tubes compress by 25% upon impact to absorb 150 km/h shockwaves and immediately spring back to return 60% of kinetic energy, a damping feat carbon fiber and metals cannot replicate without shattering or stinging the hands.',
+          'Every professional cricket bat on the planet is crafted from a single species of tree: Salix alba caerulea, grown primarily in the wetlands of Essex and Suffolk in eastern England.',
           'In 1979, Dennis Lillee famously walked out onto the WACA with an aluminum bat ("The Combat"). Within four balls, it was banned, not just for damaging the leather ball, but because metal cannot match the dynamic damping properties of natural willow, which dissipates jarring shock waves away from the batter’s wrists.',
         ],
         pullQuote: 'English Willow is nature\'s ultimate memory foam: rigid enough to resist 150 km/h impact, yet elastic enough to return 60% of that energy back to the ball.',
       },
       {
-        heading: 'The Geometry of the 42mm Edge: Moment of Inertia',
-        subheading: 'Why bats have grown three times thicker without becoming any heavier',
+        heading: 'How Do 42mm Thick Edges Maximize Polar Moment of Inertia Without Adding Bat Weight?',
+        subheading: 'Perimeter mass redistribution and computer-aided concaving science',
         content: [
-          'How do modern bats feature enormous 42mm edges while weighing the same 2lb 9oz as bats from twenty years ago? The answer lies in computer-aided pressing and weight distribution.',
+          'Direct Answer: Modern bats maintain a light 2lb 9oz pickup by scooping out wood from the non-essential upper spine and shoulders, redistributing that mass to the absolute outer perimeter edges (42mm). This maximizes the bat’s Polar Moment of Inertia (MOI), preventing the blade from twisting in the hands on off-center hits and allowing thick edges to fly for six.',
           'Old bats were pressed uniformly flat across the entire blade. Modern master batmakers use concaving techniques, scooping out unnecessary wood from the shoulders and back spine while leaving massive concentration of wood along the edges and in the lower third of the blade.',
           'By moving mass outward to the absolute perimeter of the blade, modern bats dramatically increase their Polar Moment of Inertia (MOI). In simple terms: when a 145 km/h ball strikes the outer edge of a modern bat, the blade does not twist in the batter’s hands. The bat remains rigid, transferring maximum kinetic energy directly back into the ball and allowing outside edges to carry for six.',
         ],
@@ -794,11 +843,11 @@ export const BLOG_ARTICLES: BlogArticle[] = [
         },
       },
       {
-        heading: 'The Roller Pressing Dilemma: Performance vs Longevity',
-        subheading: 'The delicate trade-off between soft, explosive ping and structural durability',
+        heading: 'What Structural Trade-Off Exists Between Mechanical Roller Pressing and Bat Ping Longevity?',
+        subheading: 'Cellular wall tension balance: explosive rebound ping versus wood lifespan',
         content: [
+          'Direct Answer: Light roller pressing preserves loose cellular elasticity to deliver explosive rebound "ping", but leaves fibers vulnerable to cracking within three matches. Heavy pressing prolongs blade durability for years but creates an overly dense, dead wooden plank that dampens exit velocity.',
           'Before a willow cleft becomes a bat, it must be passed through mechanical steel rollers exerting up to 300 pounds per square inch of pressure to compress the outer fibers.',
-          'If a batmaker presses the wood too lightly, the bat has an astonishing "ping"—the ball flies off it like a rocket—but the bat will crack within two matches. If they press it heavily, the bat will last ten years, but it will feel like a dead plank of timber.',
           'Modern international players receive bats that are pressed very lightly for peak performance, accepting that each bat may only survive three to four innings before shattering. At the elite level, boundary output is worth far more than the lifespan of a piece of wood.',
         ],
       },
