@@ -1,0 +1,6 @@
+{
+  "name": "The Corridor | Cricket Intelligence & Tactical Journal",
+  "description": "In-depth cricket analytics, biomechanical breakdowns, Hawk-Eye ball tracking data, and long-form tactical journalism across Test, ODI, and T20 cricket.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

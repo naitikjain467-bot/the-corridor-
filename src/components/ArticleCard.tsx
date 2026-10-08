@@ -1,0 +1,127 @@
+import React, { useState } from 'react';
+import { ArrowUpRight, Bookmark, Clock } from 'lucide-react';
+import { BlogArticle } from '../data/blogs.ts';
+
+interface ArticleCardProps {
+  article: BlogArticle;
+  onReadArticle: (article: BlogArticle) => void;
+  isBookmarked: boolean;
+  onToggleBookmark: (id: string, e: React.MouseEvent) => void;
+  featured?: boolean;
+}
+
+export const ArticleCard: React.FC<ArticleCardProps> = ({
+  article,
+  onReadArticle,
+  isBookmarked,
+  onToggleBookmark,
+  featured = false,
+}) => {
+  const [imgError, setImgError] = useState(false);
+
+  return (
+    <article
+      onClick={() => onReadArticle(article)}
+      className="group flex flex-col justify-between bg-[#FDFCFA] border border-[#E7E2D9] rounded-lg overflow-hidden hover:border-stone-400 hover:shadow-md transition-all duration-300 cursor-pointer"
+    >
+      <div>
+        {/* Visual Media Header with Fallback */}
+        <div className="relative aspect-[16/10] overflow-hidden bg-[#ECE6DC] border-b border-[#E7E2D9]">
+          {!imgError ? (
+            <img
+              src={article.image}
+              alt={article.imageAlt}
+              referrerPolicy="no-referrer"
+              onError={() => setImgError(true)}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+            />
+          ) : (
+            <div className="w-full h-full flex flex-col justify-between p-5 bg-gradient-to-tr from-stone-200 via-stone-100 to-amber-50/50 text-stone-700">
+              <span className="text-xs uppercase tracking-widest font-mono text-stone-500">
+                Tactical Monograph
+              </span>
+              <span className="font-editorial-serif italic text-lg line-clamp-2">
+                {article.title}
+              </span>
+            </div>
+          )}
+
+          {/* Quick Bookmark Trigger in Top Corner */}
+          <button
+            onClick={(e) => onToggleBookmark(article.id, e)}
+            className={`absolute top-3 right-3 p-2 rounded-full backdrop-blur-md transition-colors cursor-pointer ${
+              isBookmarked
+                ? 'bg-stone-900 text-stone-100'
+                : 'bg-[#FBF9F5]/90 text-stone-700 hover:bg-[#FBF9F5] hover:text-stone-950'
+            }`}
+            aria-label="Save for later"
+            title="Save for later"
+          >
+            <Bookmark className="w-3.5 h-3.5" />
+          </button>
+        </div>
+
+        {/* Content Body */}
+        <div className="p-5 sm:p-6">
+          {/* Unboxed Metadata (Zero-Pill Discipline) */}
+          <div className="flex items-center gap-2 text-xs text-stone-500 font-sans mb-2.5">
+            <span className="font-medium text-stone-800">{article.category}</span>
+            <span aria-hidden="true">·</span>
+            <span>{article.format}</span>
+            <span aria-hidden="true">·</span>
+            <span className="flex items-center gap-1">
+              <Clock className="w-3 h-3 text-stone-400" />
+              {article.readTime}
+            </span>
+          </div>
+
+          <h3 className="font-editorial-serif text-xl sm:text-2xl font-medium tracking-tight text-[#1C1917] leading-snug group-hover:text-stone-700 transition-colors mb-3 line-clamp-2 text-balance">
+            {article.title}
+          </h3>
+
+          <p className="text-sm text-stone-600 line-clamp-3 leading-relaxed mb-5 font-sans">
+            {article.subtitle}
+          </p>
+
+          {/* Micro Stat Bar */}
+          <div className="grid grid-cols-2 gap-2 p-3 bg-[#F6F2EB] rounded-md border border-[#E9E4DC] mb-2">
+            <div>
+              <div className="text-[10px] uppercase tracking-wider text-stone-500 truncate">
+                {article.metrics[0].label}
+              </div>
+              <div className="font-mono text-sm font-semibold text-stone-900 tabular-nums">
+                {article.metrics[0].value}{' '}
+                <span className="text-[10px] font-sans font-normal text-stone-500">
+                  {article.metrics[0].unit}
+                </span>
+              </div>
+            </div>
+            <div>
+              <div className="text-[10px] uppercase tracking-wider text-stone-500 truncate">
+                {article.metrics[1].label}
+              </div>
+              <div className="font-mono text-sm font-semibold text-stone-900 tabular-nums">
+                {article.metrics[1].value}{' '}
+                <span className="text-[10px] font-sans font-normal text-stone-500">
+                  {article.metrics[1].unit}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Card Footer with Byline & Arrow Action */}
+      <div className="px-5 sm:px-6 pb-5 pt-3 border-t border-[#F0EBE2] flex items-center justify-between text-xs text-stone-600 font-sans">
+        <div className="truncate pr-2">
+          <span className="font-medium text-stone-900">{article.author.name}</span>
+          <span className="text-stone-500 hidden sm:inline"> · {article.date}</span>
+        </div>
+        <span className="flex items-center gap-1 font-medium text-stone-900 group-hover:text-stone-700 whitespace-nowrap shrink-0">
+          <span>Read Paper</span>
+          <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+        </span>
+      </div>
+    </article>
+  );
+};
