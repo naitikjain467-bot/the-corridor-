@@ -1,3 +1,11 @@
+import imgFastBowler from '../assets/images/cricket_fast_bowler_delivery_1791425598812.jpg';
+import imgStadiumTwilight from '../assets/images/cricket_stadium_twilight_1791425612890.jpg';
+import imgBatterDrive from '../assets/images/cricket_batter_cover_drive_1791425624969.jpg';
+import imgSpinGrip from '../assets/images/cricket_spin_ball_grip_1791425637890.jpg';
+import imgPitchView from '../assets/images/cricket_pitch_tactical_view_1791425656574.jpg';
+import imgSlipCordon from '../assets/images/cricket_slip_cordon_fielding_1791425696964.jpg';
+import imgWillowBat from '../assets/images/cricket_english_willow_bat_1791425709289.jpg';
+
 export interface MetricPoint {
   label: string;
   value: string;
@@ -69,7 +77,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       role: 'Principal Ballistics Analyst',
       credentials: 'Lead Data Consultant, Hampshire & Global T20 Franchises',
     },
-    image: '/src/assets/images/cricket_fast_bowler_delivery_1791425598812.jpg',
+    image: imgFastBowler,
     imageAlt: 'Fast bowler releasing a delivery under stadium lights with ballistics focus',
     caption: 'Figure 1.1 — Spatial trajectory tracking of yorker release vectors across 14,200 death deliveries in elite T20 play (2021–2026).',
     abstract: 'For four decades of white-ball cricket, the standard holy grail of death bowling was unyielding: land the leather ball into the subterranean crease trench at the base of off-and-middle stumps. However, comprehensive Hawkeye spatial analytics between 2021 and 2026 reveal a profound paradigm inversion. Batters clearing their front leg and deploying 360-degree bat ramps have converted traditional straight yorkers into high-leverage scoring channels. In response, modern pace attacks have engineered the "wide-line tramline gambit" and asymmetrical boundary-funneling vectors.',
@@ -145,7 +153,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       role: 'Director of Biomechanical Modeling',
       credentials: 'PhD Sports Biomechanics (Loughborough), National Cricket Academy Consultant',
     },
-    image: '/src/assets/images/cricket_fast_bowler_delivery_1791425598812.jpg',
+    image: imgFastBowler,
     imageAlt: 'Jasprit Bumrah bowling release mechanics and wrist snap',
     caption: 'Figure 2.1 — Kinetic transfer graph highlighting Bumrah’s atypical front-foot plant and hyperextension whip at ball release.',
     abstract: 'Jasprit Bumrah violates nearly every tenet of classical English pace coaching: an abbreviated stuttering eight-pace run-up, an almost stiff front knee, hyper-extended elbow release, and an unorthodox wrist cock that points inward. Yet, across all conditions—from the bouncy strips of Perth to the abrasive clay of Kanpur—his bowling average of under 21 in Test cricket stands as the most lethal in the modern era. This investigation examines the precise physics of his kinetic chain, ground reaction forces, and unique spatial release geometry.',
@@ -221,7 +229,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       role: 'Spin Analytics Lead',
       credentials: 'CricViz Contributor & Performance Specialist',
     },
-    image: '/src/assets/images/cricket_spin_ball_grip_1791425637890.jpg',
+    image: imgSpinGrip,
     imageAlt: 'Detailed close-up grip of fingers releasing a cricket ball with pronounced seam',
     caption: 'Figure 3.1 — High-speed macro capture of mystery spin carrom-flick mechanics, showing finger-snap torque at point of separation.',
     abstract: 'For over a century, spin bowling was defined by the romantic virtues of flight, loop, drift, and dip. Bowlers like Bishan Bedi and Shane Warne tempted batters out of their crease by tossing the ball above the eyeline. In the high-velocity furnace of modern T20 leagues, however, traditional looping flight has become tactical suicide. Enter the era of the rapid mystery spinner: Rashid Khan, Sunil Narine, and Varun Chakaravarthy. This piece analyzes why release speeds above 95 km/h, finger flick releases, and flat trajectories dominate the shortest format.',
@@ -296,7 +304,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       role: 'Senior Cricket Strategist',
       credentials: 'Former Performance Analyst for ECB & Surrey CCC',
     },
-    image: '/src/assets/images/cricket_stadium_twilight_1791425612890.jpg',
+    image: imgStadiumTwilight,
     imageAlt: 'Panoramic historic cricket stadium bathed in dramatic evening twilight floodlights',
     caption: 'Figure 4.1 — Stadium atmosphere during a high-stakes fourth-innings run chase where tactical aggression alters fielding geometry.',
     abstract: 'When Brendon McCullum and Ben Stokes took charge of the England Test team in mid-2022, they initiated the most radical philosophical departure in modern red-ball history. Dubbed "Bazball," the approach was dismissed by traditionalists as reckless slogging that would inevitably collapse against elite pace attacks. Four years later, empirical analysis reveals a sophisticated economic game theory at work: by inflating the baseline run rate from 3.1 to 4.7 runs per over, England structurally dismantled the fourth-innings fielding geometry that had governed Test cricket for 145 years.',
@@ -371,7 +379,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       role: 'Senior Ballistics & Fluid Dynamics Fellow',
       credentials: 'Imperial College London & ECB Pace Bowling Advisory Panel',
     },
-    image: '/src/assets/images/cricket_pitch_tactical_view_1791425656574.jpg',
+    image: imgPitchView,
     imageAlt: 'Overhead tactical pitch view with corridor lines and deviation markers',
     caption: 'Figure 5.1 — High-speed pitch trajectory rendering mapping the 1.4-degree micro-deviation window upon wobble seam turf impact.',
     abstract: 'For over a century, the pinnacle of pace bowling craftsmanship was the conventional outswinger: an immaculate upright seam tilted at 20 degrees toward first slip, polished shiny side leading, carving through the atmosphere in an elegant aerodynamic banana arc. Yet across the last decade of Test cricket, masters of the craft—Pat Cummins, Mohammed Shami, Jasprit Bumrah, and Stuart Broad—systematically abandoned continuous conventional swing in favor of the "wobble seam." This paper explores the fluid mechanics and neuro-optical science that make the wobble seam nearly unplayable.',
@@ -446,7 +454,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       role: 'Batting Technique Biomechanist',
       credentials: 'BCCI High Performance Centre & IPL Batting Consultant',
     },
-    image: '/src/assets/images/cricket_batter_cover_drive_1791425624969.jpg',
+    image: imgBatterDrive,
     imageAlt: 'Batsman executing an aggressive stroke with pristine technical balance',
     caption: 'Figure 6.1 — Kinetic alignment during front-foot impact, illustrating center of mass distribution during horizontal-bat sweeps.',
     abstract: 'Historically, the sweep shot was viewed as an eccentric, high-risk recourse deployed primarily when conventional front-foot defense had failed. In modern cricket, however, the sweep family—traditional, reverse, paddle, slog, and switch-hit—has become the premier tactical weapon to dismantle elite spin bowling. By dropping the head below the bounce trajectory and striking the ball on a horizontal plane, modern batters systematically neutralize pitch turn, DRS ball tracking, and close-in catching fielders.',
@@ -520,7 +528,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       role: 'Chief Data Scientist',
       credentials: 'MS Analytics (MIT), Strategic Consultant to Major League Cricket & IPL',
     },
-    image: '/src/assets/images/cricket_stadium_twilight_1791425612890.jpg',
+    image: imgStadiumTwilight,
     imageAlt: 'High-octane T20 match under stadium lights with large scoreboard tracking run rates',
     caption: 'Figure 7.1 — Run-expectancy surface mapping the terminal inning totals as a function of top-order strike-rate deciles.',
     abstract: 'For the first fifteen years of T20 cricket, coaches relied on the "anchor" blueprint: one top-order batter plays through the 20 overs, scoring a respectable 65 off 50 balls (Strike Rate 130), while explosive hitters bat around them. Today, advanced Markov chain run-expectancy models prove that this philosophy is not just suboptimal; in matches where the par score exceeds 190, the classical anchor actively harms their team’s win probability. This paper quantifies the exact tipping point where wicket preservation becomes a value-destroying liability.',
@@ -596,7 +604,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       role: 'Principal Ballistics Analyst',
       credentials: 'Lead Data Consultant, Hampshire & Global T20 Franchises',
     },
-    image: '/src/assets/images/cricket_fast_bowler_delivery_1791425598812.jpg',
+    image: imgFastBowler,
     imageAlt: 'Fast bowler release stride showing wide crease angle attack vector',
     caption: 'Figure 8.1 — Spatial flight projection of left-arm over delivery angles showing right-hander visual occlusion blindspots.',
     abstract: 'In the history of the sport, right-handed bowlers outnumber left-handed bowlers by roughly four to one. Yet in ICC tournaments, powerplay strike-rates, and historic opening-over dismissals, elite left-arm pacers (Wasim Akram, Mitchell Starc, Trent Boult, Shaheen Shah Afridi) exert a disproportionate stranglehold over right-handed opening batters. Data shows left-arm quicks generate a 38% higher rate of bowled and LBW dismissals in the opening two overs of an innings. This article breaks down the optical and geometric reasons behind this enduring phenomenon.',
@@ -671,7 +679,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       role: 'Senior Cricket Strategist',
       credentials: 'Former Performance Analyst for ECB & Surrey CCC',
     },
-    image: '/src/assets/images/cricket_slip_cordon_fielding_1791425696964.jpg',
+    image: imgSlipCordon,
     imageAlt: 'Test match slip cordon fielders crouching with high intensity during overs',
     caption: 'Figure 9.1 — Cordon density and spatial dispersion tracking showing how subtle fielding shifts alter batter subconscious shot selection.',
     abstract: 'Field settings are often viewed as passive reactions to where a batter hits the ball: if a batter cuts, you post a third man; if they drive, you place a cover. In modern analytical cricket, field settings have evolved into active psychological traps designed to manipulate the batter’s weight transfer. By strategically leaving appetizing gaps or positioning fielders in non-traditional catching spots (such as the short mid-wicket trap or the straightish extra-cover), captains bait batters into playing against the pitch conditions.',
@@ -745,7 +753,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       role: 'Director of Biomechanical Modeling',
       credentials: 'PhD Sports Biomechanics (Loughborough), National Cricket Academy Consultant',
     },
-    image: '/src/assets/images/cricket_english_willow_bat_1791425709289.jpg',
+    image: imgWillowBat,
     imageAlt: 'Handcrafted Grade 1 English Willow cricket bat showcasing thick edges and pristine wood grain',
     caption: 'Figure 10.1 — Microscopic cross-section of Salix alba caerulea wood grain showing pressed cellular compression and rebound elasticity.',
     abstract: 'In the 1970s, legendary batters like Clive Lloyd and Viv Richards used bats weighing between 2lb 6oz and 2lb 8oz, with delicate 18mm edges. If a batter in 1975 mis-timed a drive off the outside edge, the ball would gently loop to point or slip. In modern cricket, a mis-hit off the toe or edge of a bat frequently sails 75 meters into the second tier of the grandstand. This paper examines the material science of English Willow (Salix alba caerulea), cold-pressing roller physics, and how modern bat profiles transformed the sport.',
